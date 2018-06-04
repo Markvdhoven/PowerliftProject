@@ -2,7 +2,7 @@
 
 Problem statement
 --------------------
-Powerlifting is a sport where are several weight classes, divisions and equipment. Ofcourse different equipment and weightclasses, and also divisions, will lead to different results in powerlifting. The goal of this project is to visualize the effects that different equipment, weightclasses and divisions have on the squat, deadlift and benchpress. This is being done for the male and female department together and seperately. 
+Powerlifting is a sport where there are several weight classes, divisions and equipment. Ofcourse different equipment and weightclasses, and also divisions, will lead to different results in powerlifting. The goal of this project is to visualize the effects that different equipment, weightclasses and divisions have on the squat, deadlift and benchpress. This is being done for the male and female department together and seperately. 
 
 
 Solution
