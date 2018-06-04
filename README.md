@@ -7,7 +7,7 @@ Powerlifting is a sport where are several weight classes, divisions and equipmen
 
 Solution
 --------------------
-The visualisations will show the effects of different equipment and weight classes on the results in powerlifting, for both the male and females. Here is the sketch for the project: https://Markvdhoven.github.io/PowerliftProject/doc
+The visualisations will show the effects of different equipment and weight classes on the results in powerlifting, for both the male and females. Here is the sketch for the project: [OpenPowerlifting](https://github.com/Markvdhoven/PowerliftProject/blob/master/doc/projectSketch.JPG)
 
 
 Prerequisites
