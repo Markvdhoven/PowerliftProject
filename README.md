@@ -2,12 +2,12 @@
 
 Problem statement
 --------------------
-Powerlifting is a sport where there is several equipment and weight classes. Ofcourse different equipment and weightclasses will lead to different results. The goal of this project is to visualize the effects that different equipment and weightclasses have on the squat, deadlift and benchpress. This is being done for the male and female department together and seperately. 
+Powerlifting is a sport where are several weight classes, divisions and equipment. Ofcourse different equipment and weightclasses, and also divisions, will lead to different results in powerlifting. The goal of this project is to visualize the effects that different equipment, weightclasses and divisions have on the squat, deadlift and benchpress. This is being done for the male and female department together and seperately. 
 
 
 Solution
 --------------------
-The visualisations will show the effects of different equipment and weight classes on the results in powerlifting, for both the male and females. 
+The visualisations will show the effects of different equipment and weight classes on the results in powerlifting, for both the male and females. Here is the sketch for the project:
 
 
 Prerequisites
@@ -19,7 +19,7 @@ The data can be found here (download openpowerlifting.zip): [OpenPowerlifting](h
 
 ### External components.
 
-d3-tip library 
+d3-tip library: [d3-tip](https://github.com/Caged/d3-tip)
 
 ### Similar. 
 
