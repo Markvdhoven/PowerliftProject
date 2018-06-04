@@ -1,5 +1,5 @@
 # PowerliftProject
-## Mark van den Hoven 10533133
+Mark van den Hoven 10533133
 
 Problem statement
 --------------------
