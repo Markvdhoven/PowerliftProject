@@ -8,7 +8,11 @@ Diagram
 
 | Function name  | Location       | Function    |
 | ------------- | ------------- | ------------ |
-| getData       | main.js          | Unloads data  |
+| getData       | Visualisation/main.js          | Unloads data  |
+| callScatter   | Visualisation/main.js         | Calls scatterplot |
+| callBarChart   | Visualisation/main.js         | Calls bar chart |
+| callSpiderChart   | Visualisation/main.js         | Calls spider chart |
+| callBoxPlot   | Visualisation/main.js         | Calls box plot |
 | makeScatter   | Visualisation/makeScatter.js  | Makes scatterplort |
 | makeAxesScatter | Visualisation/maxeScatter.js | Makes axes for scatterplot |
 | makeBarChart  | Visualisation/makeBarChart.js  | Makes bar chart |
