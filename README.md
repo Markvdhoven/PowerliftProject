@@ -28,7 +28,7 @@ Here is a link to a similar project: [towardsdatascience](https://towardsdatasci
 
 ### Hardest parts. 
 
-There are a lot of divisions so it will be hard to show all the divisions in one spiderchart. 
+There are a lot of divisions so it will be hard to show all the divisions in one spiderchart. Also the dataset is quite big, so this could also be hard to work with.
 
 Sketch
 --------------------
