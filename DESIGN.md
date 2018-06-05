@@ -8,10 +8,12 @@ Diagram
 
 | Functie naam  | Locatie       | Functie      |
 | ------------- | ------------- | ------------ |
-| makeScatter   | Visualisation  | Maakt scatterplot |
-| makeBarChart  | Visualisation  | Maakt bar chart |
-| makeSpiderChart | Visualisation | Maakt spider chart |
-| makeBoxPlot | Visualisation | Maakt box plot |
+| makeScatter   | Visualisation  | Makes scatterplort |
+| getDataScatter | makeScatter | Gets data for scatterplot |
+| make xAxis | makeScatter | Makes x-axis for scatterplot
+| makeBarChart  | Visualisation  | Makes bar chart |
+| makeSpiderChart | Visualisation | Makes spider chart |
+| makeBoxPlot | Visualisation | Makes box plot |
 
 Plugins
 ======================
