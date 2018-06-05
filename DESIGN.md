@@ -1,7 +1,7 @@
 Data sources
 ======================
 
-powerliftdata.csv, download zip here: [OpenPowerlifting](https://www.openpowerlifting.org/data.html)
+powerliftdata.csv, download zip here: [OpenPowerlifting](https://www.openpowerlifting.org/data.html). This is a relatively large (600.000+ columns) dataset, so there is also a shorter version (25.000 columns) in the datamap.
 
 Diagram
 ======================
