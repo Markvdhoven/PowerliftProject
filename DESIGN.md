@@ -1,7 +1,7 @@
 Data sources
 ======================
 
-powerliftdata.csv
+powerliftdata.csv, download zip here: [OpenPowerlifting](https://www.openpowerlifting.org/data.html)
 
 Diagram
 ======================
