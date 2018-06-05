@@ -8,11 +8,13 @@ Diagram
 
 | Function name  | Location       | Function    |
 | ------------- | ------------- | ------------ |
-| getData       | main          | Unloads data  |
-| makeScatter   | Visualisation  | Makes scatterplort |
-| makeBarChart  | Visualisation  | Makes bar chart |
-| makeSpiderChart | Visualisation | Makes spider chart |
-| makeBoxPlot | Visualisation | Makes box plot |
+| getData       | main.js          | Unloads data  |
+| makeScatter   | Visualisation/makeScatter.js  | Makes scatterplort |
+| makeAxesScatter | Visualisation/maxeScatter.js | Makes axes for scatterplot |
+| makeBarChart  | Visualisation/makeBarChart.js  | Makes bar chart |
+| makeSpiderChart | Visualisation/makeSpiderChart.js | Makes spider chart |
+| makeBoxPlot | Visualisation/maxeBoxplot.js | Makes box plot |
+| makeAxesBox | Visualisation/maxeBoxplot.js | Makes axes for boxplot |
 
 Plugins
 ======================
