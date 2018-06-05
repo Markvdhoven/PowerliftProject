@@ -16,4 +16,4 @@ Diagram
 Plugins
 ======================
 
-d3-bar, d3-tip, 
+d3-bar, d3-tip
