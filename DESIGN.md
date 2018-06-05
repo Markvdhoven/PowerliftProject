@@ -12,7 +12,7 @@ Diagram
 | makeScatter   | Visualisation/makeScatter.js  | Makes scatterplort |
 | makeAxesScatter | Visualisation/maxeScatter.js | Makes axes for scatterplot |
 | makeBarChart  | Visualisation/makeBarChart.js  | Makes bar chart |
-| makeBarChart  | Visualisation/makeBarChart.js  | Makes bar chart |
+| makeAxesBarChart  | Visualisation/makeBarChart.js  | Makes axes for bar chart |
 | makeSpiderChart | Visualisation/makeSpiderChart.js | Makes spider chart |
 | makeBoxPlot | Visualisation/maxeBoxplot.js | Makes box plot |
 | makeAxesBox | Visualisation/maxeBoxplot.js | Makes axes for boxplot |
