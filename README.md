@@ -32,4 +32,4 @@ There are a lot of divisions so it will be hard to show all the divisions in one
 
 Sketch
 --------------------
-![alt text](https://github.com/Markvdhoven/PowerliftProject/blob/master/doc/projectSketch.JPG)
+![alt text](https://github.com/Markvdhoven/PowerliftProject/blob/master/doc/designSketch.JPG)
