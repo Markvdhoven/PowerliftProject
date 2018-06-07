@@ -8,10 +8,33 @@
     <!-- D3 library -->
     <script src="https://d3js.org/d3.v3.min.js"></script>
 
+    <!-- topojson library -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+
+    <!-- contains functions for data elements and fill keys-->
+   <script src="visualisations/scatter.js"></script>
+
+    <!-- contains functions for data elements and fill keys-->
+   <script src="visualisations/main.js"></script>
+
+   <!-- latest compiled and minified css -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+   <!-- jquery library -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+   <!-- latest compiled javascript -->
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+   <!-- css sheet -->
+   <link rel="stylesheet" type="text/css" href="lift.css">
 
   </head>
 
   <body>
+
+
     <!-- container for title and subtitle-->
     <div class="container">
       <div class = "page-header">
@@ -25,6 +48,39 @@
         Mark van den Hoven 10533133, bron:
         <a href ="https://www.openpowerlifting.org/data.html">openpowerlifting.org</a>
       </p>
+    </div>
+
+    <div class="row">
+      <div class ="col-lg-1"></div>
+      <div class="col-lg-3">
+        <div id="dropdown">
+          <p><span><label for="y-axis">Select lift</label></span>
+          <select id="lift">
+            <option value="Best3SquatKg">Squat</option>
+            <option value="Best3DeadliftKg">Deadlift</option>
+            <option value="Best3BenchKg">Benchpress</option>
+            <option value="TotalKg">Total</option>
+          </select>
+          <p><span><label for="x-axis">Select sex</label></span>
+          <select id="sex">
+            <option value="M">Men</option>
+            <option value="F">Women</option>
+            <option value="all">All</option>
+          </select>
+          <p><span><label>Select equipment</label></span>
+          <select id="equipment">
+            <option value="Raw">Raw</option>
+            <option value="Wraps">Wraps</option>
+            <option value="Single-ply">Single-ply</option>
+            <option value="Multi-ply">Multi-ply</option>
+            <option value="All">All</option>
+          </select>
+          <button onclick="setGraph()">submit</button>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div id="scatter"></div>
+      </div>
     </div>
 
   </body>
