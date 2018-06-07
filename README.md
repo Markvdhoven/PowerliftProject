@@ -1,6 +1,6 @@
 # PowerliftProject
 Mark van den Hoven 10533133
-**Github page:**  https://Markvdhoven.github.io/PowerliftProject/index.html
+**Github page:**  https://Markvdhoven.github.io/PowerliftProject
 
 Problem statement
 --------------------
