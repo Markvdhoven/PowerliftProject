@@ -1,0 +1,165 @@
+function makeBarChart(lifter, data){
+  // remove old barchart if there is one
+  d3.select("#oldbar").remove();
+
+  var svg = d3.select('#dropdown')
+    .append("svg")
+    .attr("width", 1000)
+    .attr("height", 1000)
+    .attr("id", "oldbar")
+
+    makeLifterInfo(data, lifter)
+
+    // this scale is used for both x-axis and bars
+    var xscale = d3.scale.ordinal().rangeRoundBands([50, 250], .03)
+      .domain(LifterList.map(function(d) { return d["lift"]; }));
+
+    // make corrresponding axes
+    createAxis(svg, LifterList, xscale)
+
+    // make corrresponding bars
+    createBars(svg, LifterList, xscale)
+
+    // make corrresponding title
+    createTitle(svg, lifter)
+
+
+}
+
+function makeLifterInfo(data, lifter){
+  LifterList = []
+
+  // iterate over data
+  for(var info = 0; info < data.data.length; info++){
+    prop1 = "BodyweightKg"
+    prop2 = "Best3BenchKg"
+    prop3 = "Best3DeadliftKg"
+    prop4 = "Best3SquatKg"
+
+    // if data matches specific info push corresponding dict into array
+    if(data.data[info]["Name"] == lifter.Name){
+      LifterList.push({lift:prop1, value: data.data[info][prop1]})
+      LifterList.push({lift:prop2, value: data.data[info][prop2]})
+      LifterList.push({lift:prop3, value: data.data[info][prop3]})
+      LifterList.push({lift:prop4, value: data.data[info][prop4]})
+    }
+  }
+
+  console.log(lifter["Name"])
+  console.log(LifterList)
+
+  return LifterList
+}
+
+function createAxis(svg, LifterList, xscale){
+
+  // create scale for y-axis
+  var yscale = d3.scale.linear()
+    .domain([d3.max(LifterList, function(d) {return parseInt(d["value"])}), 0])
+    .range([0, 340]);
+
+  console.log(d3.max(LifterList, function(d) {return d["value"]}))
+
+  // create x-axis
+  var xAxis = d3.svg.axis()
+    .scale(xscale)
+    .orient("bottom");
+
+  // call x-axis and attributes
+  svg.append("g")
+    .attr("width", 260)
+    .attr("height", 200)
+    .attr("class", "axis")
+    .attr("transform", "translate(0," + 375 + ")")
+    .call(d3.svg.axis()
+    .scale(xscale)
+    .orient("bottom"))
+    .selectAll("text")
+    .attr("y", 0)
+    .attr("x", 9)
+    .attr("dy", ".35em")
+    .attr("transform", "rotate(45)")
+    .style("text-anchor", "start");
+
+  // create y-axis
+  var yAxis = d3.svg.axis()
+    .scale(yscale)
+    .orient("left")
+    .ticks(5);
+
+  // call y-axis and attributes
+  svg.append("g")
+    .attr("class", "axis")
+    .attr("transform", "translate(" + 40 + ",30)")
+    .call(yAxis)
+
+   // create y-axis title
+   svg.append("g")
+     .append("text")
+     .attr("transform", "rotate(-90)")
+     .attr("y", 50)
+     .attr("x", -30)
+     .attr("dy", ".15em")
+     .attr("font-size", "11px")
+     .style("text-anchor", "end")
+     .text("Kilograms");
+}
+
+/*
+* function which makes barchart bars
+**/
+function createBars(svg, LifterList, xscale){
+
+  // create tooltip for hoovering
+  // http://bl.ocks.org/Caged/6476579
+  var tip = d3.tip()
+    .attr('class', 'd3-tip')
+    .offset([10, 50])
+    .html( function(d) {
+      return "<strong>" + "<span style='color:red'>" + d["lift"] + ": " + d["value"] + "</span>" + "</strong>"
+    })
+
+  // call tooltip
+  svg.call(tip);
+
+  // create scale for bars
+  var scale = d3.scale.linear()
+    .domain([0, d3.max(LifterList, function(d) {return parseInt(d["value"]); })])
+    .range([0, 340]);
+
+  // create bar for each data-element
+  svg.selectAll(".bar")
+    .data(LifterList)
+    .enter()
+    .append("rect")
+    .attr("fill", "green")
+    .attr("class", "bar")
+    .attr("x", function(d) { return xscale(d["lift"]); })
+    .attr("y", function (d) {
+      return 370  - scale(d["value"]);
+    })
+    .attr("width", function(d) {
+        return 35;
+    })
+    .attr("height", function(d){
+      return scale(d["value"]);
+    })
+    .attr("stroke", "orange")
+    .attr("stroke-width", function(d) {
+       return d/2;
+     })
+     // show tooltip when mouseover
+    .on('mouseover', tip.show)
+    .on('mouseout', tip.hide);
+}
+
+/*
+* function which makes barchart title
+**/
+function createTitle(svg, lifter){
+  svg.append("g")
+    .attr("transform", "translate(" + (350/2) + ", 15)")
+    .append("text")
+    .text("Lifts of " + lifter["Name"])
+    .style({"text-anchor":"middle", "font-family":"Arial", "font-weight":"800"});
+}

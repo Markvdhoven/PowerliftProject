@@ -117,12 +117,15 @@ function makeGraph(data, lift, sex, equipment){
         .attr("cx", function(d) { return x(d.BodyweightKg); })
         .attr("cy", function(d) { return y(d[lift]); })
         // .style("fill", function(d) { return color(cValue(d));})
+        .on("mouseover", function(d) {console.log(this)})
+        .on("click", function(d){ makeBarChart(d, data); console.log("hoi")})
         .on("mouseover", function(d) {
+          console.log("hoi")
           tooltip.transition()
                .duration(200)
                .style("opacity", .9)
                .style("color", "red")
-          tooltip.html(d["Name"] + ": " + "Bodyweight: " + d["BodyweightKg"] + ", " + lift + ": " + d[lift])
+          tooltip.html("<strong>" + d["Name"] + ": " + "Bodyweight: " + d["BodyweightKg"] + ", " + lift + ": " + d[lift] + "</strong>")
                .style("left", (d3.event.pageX + 5) + "px")
                .style("top", (d3.event.pageY - 28) + "px");
           })

@@ -1,6 +1,6 @@
 
 .dot {
-  stroke: "black";
+  stroke: DarkSlateGray;
 }
 
 .legend {
@@ -33,7 +33,7 @@
 
 /* stylesheet for bars */
 .bar {
-  fill: steelblue;
+  fill: DarkSlateGray;
 }
 
 /* stylesheet for hovering */
