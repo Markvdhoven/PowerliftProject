@@ -3,8 +3,7 @@ function makeGraph(data, lift, sex, equipment){
 
   selecteddata = []
   lengthOfArray= data.data.length
-  console.log(sex)
-  console.log(equipment)
+
 
   if(equipment == "All"){
     if(sex == "all"){
@@ -12,7 +11,7 @@ function makeGraph(data, lift, sex, equipment){
         selecteddata.push(data.data[i])
       }
     }
-    if(sex != "all"){
+    else if(sex != "all"){
       for(var i = 0; i < lengthOfArray; i++){
         if(data.data[i].Sex == sex){
           selecteddata.push(data.data[i])
@@ -38,8 +37,6 @@ function makeGraph(data, lift, sex, equipment){
     }
 
   }
-
-  console.log(selecteddata)
 
   // create margin for scatterplot
   var margin = {top: 20, right: 30, bottom: 30, left: 30},
@@ -117,10 +114,8 @@ function makeGraph(data, lift, sex, equipment){
         .attr("cx", function(d) { return x(d.BodyweightKg); })
         .attr("cy", function(d) { return y(d[lift]); })
         // .style("fill", function(d) { return color(cValue(d));})
-        .on("mouseover", function(d) {console.log(this)})
-        .on("click", function(d){ makeBarChart(d, data); console.log("hoi")})
+        .on("click", function(d){ makeBarChart(d, data)})
         .on("mouseover", function(d) {
-          console.log("hoi")
           tooltip.transition()
                .duration(200)
                .style("opacity", .9)
@@ -137,15 +132,13 @@ function makeGraph(data, lift, sex, equipment){
 
     // create scatterplot title
     svg.append("text")
-        .attr("class", "label")
-        .attr("font-size","18px")
-        .attr("x", width - 200)
-        .attr("y", 20)
-        .style("text-anchor", "end")
-        .text("Scatterplot: Bodyweight vs " + lift);
+        .attr("x", (width / 2))
+        .attr("y", 3 + (margin.top / 2))
+        .attr("text-anchor", "middle")
+        .text("Scatterplot: Bodyweight vs " + lift + ", sex: " + sex)
+        .style({"text-anchor":"middle", "font-family":"Arial", "font-weight":"800", "font-size": "12px"});
 }
 
 function setGraph() {
-  console.log($('#equipment').val())
 	main($('#lift').val(), $('#sex').val(), $('#equipment').val());
 }

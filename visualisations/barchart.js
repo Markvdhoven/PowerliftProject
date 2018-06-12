@@ -4,8 +4,8 @@ function makeBarChart(lifter, data){
 
   var svg = d3.select('#dropdown')
     .append("svg")
-    .attr("width", 1000)
-    .attr("height", 1000)
+    .attr("width", 500)
+    .attr("height", 500)
     .attr("id", "oldbar")
 
     makeLifterInfo(data, lifter)
@@ -45,8 +45,6 @@ function makeLifterInfo(data, lifter){
     }
   }
 
-  console.log(lifter["Name"])
-  console.log(LifterList)
 
   return LifterList
 }
@@ -57,8 +55,6 @@ function createAxis(svg, LifterList, xscale){
   var yscale = d3.scale.linear()
     .domain([d3.max(LifterList, function(d) {return parseInt(d["value"])}), 0])
     .range([0, 340]);
-
-  console.log(d3.max(LifterList, function(d) {return d["value"]}))
 
   // create x-axis
   var xAxis = d3.svg.axis()
@@ -161,5 +157,5 @@ function createTitle(svg, lifter){
     .attr("transform", "translate(" + (350/2) + ", 15)")
     .append("text")
     .text("Lifts of " + lifter["Name"])
-    .style({"text-anchor":"middle", "font-family":"Arial", "font-weight":"800"});
+    .style({"text-anchor":"middle", "font-family":"Arial", "font-weight":"800", "font-size": "12px"});
 }

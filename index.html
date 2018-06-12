@@ -10,11 +10,15 @@
 
     <!-- D3 tip -->
     <script src="https://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+
     <!-- topojson library -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
 
    <!-- css sheet -->
    <link rel="stylesheet" type="text/css" href="style/lift.css">
+
+   <!-- contains functions for data elements and fill keys-->
+   <script src="visualisations/boxplot.js"></script>
 
     <!-- contains functions for data elements and fill keys-->
     <script src="visualisations/barchart.js"></script>
@@ -24,6 +28,9 @@
 
     <!-- contains functions for data elements and fill keys-->
    <script src="visualisations/main.js"></script>
+
+   <!-- boxplot -->
+   <script src="visualisations/box.js"></script>
 
    <!-- latest compiled and minified css -->
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -56,8 +63,8 @@
     </div>
 
     <div class="row">
-      <div class ="col-lg-1"></div>
-      <div class="col-lg-3">
+      <div class ="col-lg-1" id="fixed"></div>
+      <div class="col-lg-3" id="fixed">
         <div id="dropdown">
           <p><span><label for="y-axis">Select lift</label></span>
           <select id="lift">
@@ -83,17 +90,17 @@
           <button onclick="setGraph()">submit</button>
         </div>
       </div>
-      <div class="col-lg-8">
-        <div id="scatter"></div>
+      <div class="col-lg-8" id="fixed">
+        <div id="scatter"> </div>
       </div>
     </div>
 
-    <div class="row">
-      <div class ="col-lg-1"></div>
-      <div class ="col-lg-11"></div>
-        <div id="barchart"></div>
-      </div>
+    <div class="row" id="fixed">
+      <div class ="col-lg-4"></div>
+      <div class ="col-lg-8" id="boxplot"></div>
     </div>
+
+
 
 
 
