@@ -11,8 +11,7 @@ function boxPlot(data, lift, sex){
       max = -Infinity;
 
   LiftList = []
-  console.log(data.data)
-  console.log(lift)
+
 
   // iterate over data
   for(var info = 0; info < data.data.length; info++){
@@ -63,7 +62,7 @@ function boxPlot(data, lift, sex){
       }
   }
 
-  console.log(LiftList)
+
 
   var info = [];
   info[0] = [];
@@ -108,7 +107,7 @@ function boxPlot(data, lift, sex){
 		if (rowMin < min) min = rowMin;
   });
 
-  var chart = d3.box()
+  var chart = d3.box(data, lift)
 		.whiskers(iqr(1.5))
 		.height(height)
 		.domain([min, max])
@@ -137,6 +136,7 @@ function boxPlot(data, lift, sex){
 	var yAxis = d3.svg.axis()
     .scale(y)
     .orient("left");
+
 
   svg.selectAll(".box")
       .data(info)

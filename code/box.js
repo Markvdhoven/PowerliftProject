@@ -1,5 +1,5 @@
 // Inspired by http://informationandvisualization.de/blog/box-plot
-d3.box = function() {
+d3.box = function(fulldata, lift) {
   var width = 1,
       height = 1,
       duration = 0,
@@ -18,6 +18,7 @@ d3.box = function() {
       //d = d.map(value).sort(d3.ascending);
 	  //var boxIndex = data[0];
 	  //var boxIndex = 1;
+
 	  var d = data[1].sort(d3.ascending);
 
 	 // console.log(boxIndex);
@@ -78,6 +79,7 @@ d3.box = function() {
           .attr("y1", function(d) { return x1(d[0]); })
           .attr("y2", function(d) { return x1(d[1]); });
 
+
       center.transition()
           .duration(duration)
           .style("opacity", 1)
@@ -101,6 +103,7 @@ d3.box = function() {
           .attr("y", function(d) { return x0(d[2]); })
           .attr("width", width)
           .attr("height", function(d) { return x0(d[0]) - x0(d[2]); })
+          .on("click", function(d) { spiderChart(fulldata, data[0], lift)})
         .transition()
           .duration(duration)
           .attr("y", function(d) { return x1(d[2]); })
