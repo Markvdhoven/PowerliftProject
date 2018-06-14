@@ -95,7 +95,8 @@ var text = svg.append("text")
 	.attr("y", 10)
 	.attr("font-size", "12px")
 	.attr("fill", "#404040")
-	.text("What % does a age-group lift (" + equipment + ")");
+	.text("What % does a age-group lift (" + equipment + ")")
+  .style({"text-anchor":"middle", "font-family":"Arial", "font-weight":"800", "font-size": "12px"});
 
 //Initiate Legend
 var legend = svg.append("g")
