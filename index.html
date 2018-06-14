@@ -66,12 +66,18 @@
         Mark van den Hoven 10533133, bron:
         <a href ="https://www.openpowerlifting.org/data.html">openpowerlifting.org</a>
       </p>
-    </div>
 
     <div class="row">
-      <div class ="col-lg-1" id="fixed"></div>
-      <div class="col-lg-3" id="fixed">
+
+      <div class="col-lg-4" style="height:400px">
         <div id="dropdown">
+          Powerlifting is a strength sport that consists of three attempts at maximal weight
+          on three lifts: squat, bench press, and deadlift. As in the sport of Olympic weightlifting,
+          it involves the athlete attempting a maximal weight single lift of a barbell loaded with weight
+          plates.[1] Powerlifting evolved from a sport known as "odd lifts", which followed the same
+          three-attempt format but used a wider variety of events, akin to strongman competition.
+          Eventually odd lifts became standardized to the current three. Select a lift, sex and
+          equipement and you can see the visualisations!
           <p><span><label for="y-axis">Select lift</label></span>
           <select id="lift">
             <option value="Best3SquatKg">Squat</option>
@@ -96,15 +102,21 @@
           <button onclick="setGraph()">submit</button>
         </div>
       </div>
-      <div class="col-lg-8" id="fixed">
+      <div class="col-lg-8" style="height:400px">
         <div id="scatter"> </div>
       </div>
     </div>
 
-    <div class="row" id="fixed">
-      <div class ="col-lg-4"></div>
-      <div class ="col-lg-8" id="boxplot"></div>
+    <div class="row">
+      <div class ="col-lg-4" style="height:400px" id="barchart"></div>
+      <div class ="col-lg-8" style="height:400px" id="boxplot"></div>
     </div>
+
+    <div class="row">
+      <div class = "col-lg-12" id="chart">
+    </div>
+
+  </div>
 
   </body>
 </html>

@@ -5,6 +5,18 @@
   height: 400px;
 }
 
+body {
+  overflow: scroll;
+  margin: 0;
+  font-size: 14px;
+  font-family: "Helvetica Neue", Helvetica;
+}
+
+#chart {
+  top: 50px;
+  left: 100px;
+}
+
 .box {
   font: 10px sans-serif;
 }
@@ -12,7 +24,7 @@
 .box line,
 .box rect,
 .box circle {
-  fill: DarkSlateGray;
+  fill: CornflowerBlue;
   stroke: #000;
   stroke-width: 1px;
 }
@@ -27,7 +39,7 @@
 }
 
 .dot {
-  stroke: DarkSlateGray;
+  stroke: CornflowerBlue;
 }
 
 .legend {
@@ -60,7 +72,7 @@
 
 /* stylesheet for bars */
 .bar {
-  fill: DarkSlateGray;
+  fill: CornflowerBlue;
 }
 
 /* stylesheet for hovering */

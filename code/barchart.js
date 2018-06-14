@@ -2,7 +2,7 @@ function makeBarChart(lifter, data){
   // remove old barchart if there is one
   d3.select("#oldbar").remove();
 
-  var svg = d3.select('#dropdown')
+  var svg = d3.select('#barchart')
     .append("svg")
     .attr("width", 500)
     .attr("height", 500)

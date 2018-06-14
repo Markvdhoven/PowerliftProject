@@ -4,6 +4,12 @@ function main(lift, sex, equipment){
 
     boxPlot(data, lift, sex)
     makeGraph(data, lift, sex, equipment)
+    console.log(data)
+    makeBarChart(data.data[1], data)
+    spiderChart(data, equipment, lift)
+
 
   })
 }
+
+main("Best3SquatKg", "M", "Raw")
