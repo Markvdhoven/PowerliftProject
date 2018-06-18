@@ -1,7 +1,10 @@
-function makeGraph(data, lift, sex, equipment){
+function makeGraph(data, lift, sex, equipment, lifter){
   d3.select("#scatterplot").remove();
 
   selecteddata = []
+  lifterList = []
+
+
   lengthOfArray= data.data.length
 
 
@@ -9,6 +12,9 @@ function makeGraph(data, lift, sex, equipment){
     if(sex == "all"){
       for(var i = 0; i < lengthOfArray; i++){
         selecteddata.push(data.data[i])
+        if(data.data[i]["Name"] == lifter){
+          lifterList.push(data.data[i])
+        }
       }
     }
     else if(sex != "all"){
@@ -109,9 +115,9 @@ function makeGraph(data, lift, sex, equipment){
     svg.selectAll(".dot")
         .data(selecteddata)
         .enter().append("circle")
-        .attr("class", "dot")
-        .attr("r", function(d) { return (d.BodyweightKg == 0 || d[lift] == 0) ? 0 : 2; })
-        .attr("cx", function(d) { return x(d.BodyweightKg); })
+        .attr("class", function(d){return (d.Name == lifter) ? "dot1" : "dot"})
+        .attr("r", function(d) { return (d.BodyweightKg == 0 || d[lift] == 0) ? 0 : (d.Name == lifter) ? 5 : 2; })
+        .attr("cx", function(d) { return isNaN(d.BodyweightKg) ? 0: x(d.BodyweightKg); })
         .attr("cy", function(d) { return y(d[lift]); })
         // .style("fill", function(d) { return color(cValue(d));})
         .on("click", function(d){ makeBarChart(d, data)})
@@ -129,6 +135,36 @@ function makeGraph(data, lift, sex, equipment){
                  .duration(500)
                  .style("opacity", 0);
         });
+
+    console.log("lifterlist", lifterList)
+
+    svg.selectAll('.dot1')
+      .remove()
+
+    svg.selectAll('.dot1')
+      .data(lifterList)
+      .enter().append("circle")
+      .attr("class", function(d){return "dot1"})
+      .attr("r", function(d) { console.log("hoi"); return (d.BodyweightKg == 0 || d[lift] == 0) ? 0 : (d.Name == lifter) ? 5 : 2; })
+      .attr("cx", function(d) { return isNaN(d.BodyweightKg) ? 0: x(d.BodyweightKg); })
+      .attr("cy", function(d) { return y(d[lift]); })
+      // .style("fill", function(d) { return color(cValue(d));})
+      .on("click", function(d){ makeBarChart(d, data)})
+      .on("mouseover", function(d) {
+        tooltip.transition()
+             .duration(200)
+             .style("opacity", .9)
+             .style("color", "red")
+        tooltip.html("<strong>" + d["Name"] + ": " + "Bodyweight: " + d["BodyweightKg"] + ", " + lift + ": " + d[lift] + "</strong>")
+             .style("left", (d3.event.pageX + 5) + "px")
+             .style("top", (d3.event.pageY - 28) + "px");
+        })
+      .on("mouseout", function(d) {
+          tooltip.transition()
+               .duration(500)
+               .style("opacity", 0);
+      });
+
 
     // create scatterplot title
     svg.append("text")

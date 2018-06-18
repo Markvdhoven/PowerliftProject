@@ -159,3 +159,25 @@ function createTitle(svg, lifter){
     .text("Lifts of " + lifter["Name"])
     .style({"text-anchor":"middle", "font-family":"Arial", "font-weight":"800", "font-size": "12px"});
 }
+
+function setBar(){
+  d3.json("data/datashort2.json", function(error, data) {
+    if (error) throw error;
+
+    var count = 0;
+
+    var searchValue = document.getElementById("competetorName").value
+
+    for(var i = 0; i < data.data.length; i++){
+      if(data.data[i]["Name"] == searchValue){
+        makeBarChart(data.data[i], data)
+        count += 1;
+      }
+    }
+    
+    makeGraph(data, "Best3SquatKg", "all", "All", searchValue)
+    if(count == 0) alert('No such competetor')
+    if(count == 0) throw new TypeError('There is no such competator');
+
+  })
+}

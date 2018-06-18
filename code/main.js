@@ -3,9 +3,10 @@ function main(lift, sex, equipment){
     if (error) throw error;
 
     boxPlot(data, lift, sex)
-    makeGraph(data, lift, sex, equipment)
+    makeGraph(data, lift, sex, equipment, "none")
     console.log(data)
     makeBarChart(data.data[1], data)
+    console.log("check", data.data[1])
     spiderChart(data, equipment, lift)
 
 

@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Powerlift project</title>
 
     <!-- D3 library -->
@@ -67,6 +68,12 @@
         <a href ="https://www.openpowerlifting.org/data.html">openpowerlifting.org</a>
       </p>
 
+
+
+
+
+
+
     <div class="row">
 
       <div class="col-lg-4" style="height:400px">
@@ -108,7 +115,12 @@
     </div>
 
     <div class="row">
-      <div class ="col-lg-4" style="height:400px" id="barchart"></div>
+      <div class ="col-lg-4" style="height:400px" id="barchart">
+          <p><span><label>Search competetor:</span></label></p>
+              <input type="text" placeholder="Search.." name="search" id="competetorName">
+              <button type="submit" onclick="setBar()"><i class="fa fa-search"></i></button>
+      </div>
+
       <div class ="col-lg-8" style="height:400px" id="boxplot"></div>
     </div>
 
