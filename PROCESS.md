@@ -28,3 +28,6 @@ the spiderchart.
 Presentation day
 
 # day 11
+Today I made a search bar. Here you can look for contesters in the database,
+and the barchart will be updated and the dots in the scatterplot will be
+highlighted accordingly.
