@@ -4,7 +4,7 @@ function makeGraph(data, lift, sex, equipment, lifter){
   selecteddata = []
   lifterList = []
 
-
+  console.log(lifter)
   lengthOfArray= data.data.length
 
 
@@ -21,6 +21,9 @@ function makeGraph(data, lift, sex, equipment, lifter){
       for(var i = 0; i < lengthOfArray; i++){
         if(data.data[i].Sex == sex){
           selecteddata.push(data.data[i])
+          if(data.data[i]["Name"] == lifter){
+            lifterList.push(data.data[i])
+          }
         }
       }
     }
@@ -31,6 +34,9 @@ function makeGraph(data, lift, sex, equipment, lifter){
       for(var i = 0; i < lengthOfArray; i++){
         if(data.data[i].Equipment == equipment){
         selecteddata.push(data.data[i])
+        if(data.data[i]["Name"] == lifter){
+          lifterList.push(data.data[i])
+        }
         }
       }
     }
@@ -38,6 +44,9 @@ function makeGraph(data, lift, sex, equipment, lifter){
       for(var i = 0; i < lengthOfArray; i++){
         if(data.data[i].Equipment == equipment && data.data[i].Sex == sex){
         selecteddata.push(data.data[i])
+        if(data.data[i]["Name"] == lifter){
+          lifterList.push(data.data[i])
+        }
         }
       }
     }
@@ -136,16 +145,18 @@ function makeGraph(data, lift, sex, equipment, lifter){
                  .style("opacity", 0);
         });
 
-    console.log("lifterlist", lifterList)
+
 
     svg.selectAll('.dot1')
       .remove()
+
+    console.log(lifterList)
 
     svg.selectAll('.dot1')
       .data(lifterList)
       .enter().append("circle")
       .attr("class", function(d){return "dot1"})
-      .attr("r", function(d) { console.log("hoi"); return (d.BodyweightKg == 0 || d[lift] == 0) ? 0 : (d.Name == lifter) ? 5 : 2; })
+      .attr("r", function(d) { return (d.BodyweightKg == 0 || d[lift] == 0) ? 0 : (d.Name == lifter) ? 5 : 2; })
       .attr("cx", function(d) { return isNaN(d.BodyweightKg) ? 0: x(d.BodyweightKg); })
       .attr("cy", function(d) { return y(d[lift]); })
       // .style("fill", function(d) { return color(cValue(d));})
@@ -171,7 +182,7 @@ function makeGraph(data, lift, sex, equipment, lifter){
         .attr("x", (width / 2))
         .attr("y", 3 + (margin.top / 2))
         .attr("text-anchor", "middle")
-        .text("Scatterplot: Bodyweight vs " + lift + ", sex: " + sex)
+        .text("Scatterplot: Bodyweight vs " + lift + ", sex: " + sex + ", equipment: " + equipment)
         .style({"text-anchor":"middle", "font-family":"Arial", "font-weight":"800", "font-size": "12px"});
 }
 

@@ -7,7 +7,7 @@ import json
 import os
 
 # read csv file
-with open('editeddata.csv', encoding='utf-8-sig') as csvfile:
+with open('powerliftdataAB.csv', encoding='utf-8-sig') as csvfile:
     bevolkingsinfo = csv.reader(csvfile, delimiter=';')
     fieldnames = ()
 
@@ -18,7 +18,7 @@ with open('editeddata.csv', encoding='utf-8-sig') as csvfile:
         break
 
     # open JSON file
-    jsonfile = open('datashort2.json', 'w')
+    jsonfile = open('powerliftdataAB.json', 'w')
 
     jsonfile.write('{ "data" : \n')
     jsonfile.write('[ \n')

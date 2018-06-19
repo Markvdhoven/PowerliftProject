@@ -7,7 +7,6 @@ function spiderChart(data, equipment, lift){
   //Legend titles
   var LegendOptions = ['Male', 'Female'];
 
-  console.log(data, equipment, lift)
 
   var scatterList = []
   var scatterListMen = []
@@ -17,7 +16,12 @@ function spiderChart(data, equipment, lift){
   sumAvgWomen = 0
 
   avgMenJunior = selectDataUnder18(data, equipment, lift)[0]
-  avgWomenJunior = selectDataUnder18(data, equipment, lift)[1]
+  if(isNaN(selectDataUnder18(data, equipment, lift)[1])){
+    avgWomenJunior = 0;
+  }
+  else avgWomenJunior = selectDataUnder18(data, equipment, lift)[1];
+
+  console.log("jun", avgWomenJunior)
 
   sumAvgMen += avgMenJunior
   sumAvgWomen += avgWomenJunior
@@ -25,6 +29,7 @@ function spiderChart(data, equipment, lift){
 
   avgMenAdolecents =  selectDataAge1toAge2(data, equipment, lift, 18, 36)[0]
   avgWomenAdolecents =  selectDataAge1toAge2(data, equipment, lift, 18, 36)[1]
+  console.log("adol", avgWomenAdolecents)
 
   sumAvgMen += avgMenAdolecents
   sumAvgWomen += avgWomenAdolecents
@@ -32,22 +37,36 @@ function spiderChart(data, equipment, lift){
 
   avgMenAdults =  selectDataAge1toAge2(data, equipment, lift, 36, 54)[0]
   avgWomenAdults =  selectDataAge1toAge2(data, equipment, lift, 36, 54)[1]
+  console.log("adul", avgWomenAdults)
 
   sumAvgMen += avgMenAdults
   sumAvgWomen += avgWomenAdults
 
 
   avgMenMiddleAge =  selectDataAge1toAge2(data, equipment, lift, 54, 65)[0]
-  avgWomenMiddleAge =  selectDataAge1toAge2(data, equipment, lift, 54, 65)[1]
+
+  if(isNaN(selectDataAge1toAge2(data, equipment, lift, 54, 65)[1])){
+    avgWomenMiddleAge = 0
+  }
+  else avgWomenMiddleAge =  selectDataAge1toAge2(data, equipment, lift, 54, 65)[1];
+  console.log("mid", avgWomenMiddleAge)
 
   sumAvgMen += avgMenMiddleAge
   sumAvgWomen += avgWomenMiddleAge
 
   avgMenSeniors =  selectDataOver64(data, equipment, lift)[0]
-  avgWomenSeniors =  selectDataOver64(data, equipment, lift)[1]
+
+  if(isNaN(selectDataOver64(data, equipment, lift)[1])){
+    avgWomenSeniors = 0
+  }
+  else avgWomenSeniors =  selectDataOver64(data, equipment, lift)[1];
+
+  console.log("sen", avgWomenSeniors)
 
   sumAvgMen += avgMenSeniors
   sumAvgWomen += avgWomenSeniors
+
+  console.log("sumwomen", sumAvgWomen)
 
   scatterListMen.push({axis: "Juniors", value : avgMenJunior / sumAvgMen})
   scatterListWomen.push({axis: "Juniors", value : avgWomenJunior / sumAvgWomen})
@@ -69,7 +88,6 @@ function spiderChart(data, equipment, lift){
   scatterList.push(scatterListMen)
   scatterList.push(scatterListWomen)
 
-  console.log(scatterList)
 
   var mycfg = {
     w: w,

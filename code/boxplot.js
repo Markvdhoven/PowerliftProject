@@ -82,10 +82,10 @@ function boxPlot(data, lift, sex){
 	info[3][1] = [];
 
   LiftList.forEach(function(d) {
-    v1 = Math.floor(d["Raw"]),
-    v2 = Math.floor(d["Wraps"]),
-    v3 = Math.floor(d["Single-ply"]),
-    v4 = Math.floor(d["Multi-ply"]);
+    v1 = Math.floor(Math.abs(d["Raw"])),
+    v2 = Math.floor(Math.abs(d["Wraps"])),
+    v3 = Math.floor(Math.abs(d["Single-ply"])),
+    v4 = Math.floor(Math.abs(d["Multi-ply"]));
 
     var rowMax = Math.max(v1, Math.max(v2, Math.max(v3,v4)))
     var rowMin = Math.min(v1, Math.max(v2, Math.max(v3,v4)))
@@ -122,7 +122,7 @@ function boxPlot(data, lift, sex){
 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   var x = d3.scale.ordinal()
-		.domain(info.map(function(d) { console.log(d); return d[0] } ) )
+		.domain(info.map(function(d) { return d[0] } ) )
 		.rangeRoundBands([0 , width], 0.7, 0.3);
 
   var xAxis = d3.svg.axis()

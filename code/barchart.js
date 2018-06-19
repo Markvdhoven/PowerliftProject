@@ -156,12 +156,12 @@ function createTitle(svg, lifter){
   svg.append("g")
     .attr("transform", "translate(" + (350/2) + ", 15)")
     .append("text")
-    .text("Lifts of " + lifter["Name"])
+    .text("Lifts of " + lifter["Name"] + ", "+ lifter["Equipment"])
     .style({"text-anchor":"middle", "font-family":"Arial", "font-weight":"800", "font-size": "12px"});
 }
 
 function setBar(){
-  d3.json("data/datashort2.json", function(error, data) {
+  d3.json(buttonValue, function(error, data) {
     if (error) throw error;
 
     var count = 0;
@@ -174,10 +174,13 @@ function setBar(){
         count += 1;
       }
     }
-    
-    makeGraph(data, "Best3SquatKg", "all", "All", searchValue)
+    console.log($('#lift').val())
+    console.log($('#sex').val())
+    console.log($('#equipment').val())
+
+    makeGraph(data, $('#lift').val(), $('#sex').val(), $('#equipment').val(), searchValue)
     if(count == 0) alert('No such competetor')
-    if(count == 0) throw new TypeError('There is no such competator');
+    if(count == 0) throw new Error('There is no such competator');
 
   })
 }
