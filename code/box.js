@@ -7,9 +7,9 @@ d3.box = function(fulldata, lift) {
       value = Number,
       whiskers = boxWhiskers,
       quartiles = boxQuartiles,
-	  showLabels = true, // whether or not to show text labels
-	  numBars = 4,
-	  curBar = 1,
+	    showLabels = true, // whether or not to show text labels
+	    numBars = 4,
+	    curBar = 1,
       tickFormat = null;
 
   // For each small multiple…

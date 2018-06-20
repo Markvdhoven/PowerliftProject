@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Powerlift project</title>
+
+    <!-- D3 library -->
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+
+    <!-- D3 tip -->
+    <script src="https://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+
+    <!-- topojson library -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+
+   <!-- css sheet -->
+   <link rel="stylesheet" type="text/css" href="css/lift.css">
+
+   <!-- contains functions for data elements and fill keys-->
+   <script src="code/spider.js"></script>
+
+   <!-- contains functions for data elements and fill keys-->
+   <script src="code/spiderchart.js"></script>
+
+   <!-- contains functions for data elements and fill keys-->
+   <script src="code/boxplot.js"></script>
+
+    <!-- contains functions for data elements and fill keys-->
+    <script src="code/barchart.js"></script>
+
+    <!-- contains functions for data elements and fill keys-->
+   <script src="code/scatter.js"></script>
+
+    <!-- contains functions for data elements and fill keys-->
+   <script src="code/main.js"></script>
+
+   <!-- boxplot -->
+   <script src="code/box.js"></script>
+
+   <!-- latest compiled and minified css -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+   <!-- jquery library -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+   <!-- latest compiled javascript -->
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Powerlift Project</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a href="index.html">Home</a></li>
+          <li class="active"><a href="visualisations.html">Visualisations</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- container for title and subtitle-->
+    <div class="container">
+      <div class = "page-header">
+        <h1> Important factors in <mark> powerlifting </mark>
+        </h1>
+        <h2>
+          Visualisations that show the influence of weight class, equipment and divisions on prestations in powerlifting.
+        </h2>
+        <h3>
+          Select the first letter of the first name of your favourite lifter:
+        </h3>
+        <button type="button" onclick="buttonMainAB()" id="clickAB" value="data/powerliftdataAB.json">A,B</button>
+        <button type="button" onclick="buttonMainCD()" id="clickCD" value="data/powerliftdataCD.json">C,D</button>
+        <button type="button" onclick="buttonMainEF()" id="clickEF" value="data/powerliftdataEF.json">E,F</button>
+        <button type="button" onclick="buttonMainGH()" id="clickGH" value="data/powerliftdataGH.json">G,H</button>
+        <button type="button" onclick="buttonMainIJ()" id="clickIJ" value="data/powerliftdataIJ.json">I,J</button>
+        <button type="button" onclick="buttonMainKL()" id="clickKL" value="data/powerliftdataKL.json">K,L</button>
+        <button type="button" onclick="buttonMainMN()" id="clickMN" value="data/powerliftdataMN.json">M,N</button>
+        <button type="button" onclick="buttonMainOP()" id="clickOP" value="data/powerliftdataOP.json">O,P</button>
+        <button type="button" onclick="buttonMainQR()" id="clickQR" value="data/powerliftdataQR.json">Q,R</button>
+        <button type="button" onclick="buttonMainST()" id="clickST" value="data/powerliftdataST.json">S,T</button>
+        <button type="button" onclick="buttonMainUV()" id="clickUV" value="data/powerliftdataUV.json">U,V</button>
+        <button type="button" onclick="buttonMainWXYZ()" id="clickWXYZ" value="data/powerliftdataWXYZ.json">W,X,Y,Z</button>
+        <h3>Then type in his or her full name:</h3>
+            <input type="text" placeholder="Search.." name="search" id="competetorName">
+            <button type="submit" onclick="setBar()"><i class="fa fa-search"></i></button>
+      </div>
+
+
+
+      <p>
+        Mark van den Hoven 10533133, bron:
+        <a href ="https://www.openpowerlifting.org/data.html">openpowerlifting.org</a>
+      </p>
+
+
+
+
+
+
+    <div class="row">
+
+      <div class="col-lg-4" style="height:400px">
+        <div id="dropdown">
+          Powerlifting is a strength sport that consists of three attempts at maximal weight
+          on three lifts: squat, bench press, and deadlift. As in the sport of Olympic weightlifting,
+          it involves the athlete attempting a maximal weight single lift of a barbell loaded with weight
+          plates.[1] Powerlifting evolved from a sport known as "odd lifts", which followed the same
+          three-attempt format but used a wider variety of events, akin to strongman competition.
+          Eventually odd lifts became standardized to the current three. Select a lift, sex and
+          equipement and you can see the visualisations!
+          <p><span><label for="y-axis">Select lift</label></span>
+          <select id="lift">
+            <option value="Best3SquatKg">Squat</option>
+            <option value="Best3DeadliftKg">Deadlift</option>
+            <option value="Best3BenchKg">Benchpress</option>
+            <option value="TotalKg">Total</option>
+          </select>
+          <p><span><label for="x-axis">Select sex</label></span>
+          <select id="sex">
+            <option value="M">Men</option>
+            <option value="F">Women</option>
+            <option value="all">All</option>
+          </select>
+          <p><span><label>Select equipment</label></span>
+          <select id="equipment">
+            <option value="Raw">Raw</option>
+            <option value="Wraps">Wraps</option>
+            <option value="Single-ply">Single-ply</option>
+            <option value="Multi-ply">Multi-ply</option>
+            <option value="All">All</option>
+          </select>
+          <button onclick="setGraph()">submit</button>
+        </div>
+      </div>
+      <div class="col-lg-8" style="height:400px">
+        <div id="scatter"> </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class ="col-lg-4" style="height:400px" id="barchart">
+
+      </div>
+
+      <div class ="col-lg-8" style="height:400px" id="boxplot"></div>
+    </div>
+
+    <div class="row">
+      <div class = "col-lg-12" id="chart">
+    </div>
+
+  </div>
+
+  </body>
+</html>

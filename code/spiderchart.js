@@ -68,21 +68,21 @@ function spiderChart(data, equipment, lift){
 
   console.log("sumwomen", sumAvgWomen)
 
-  scatterListMen.push({axis: "Juniors", value : avgMenJunior / sumAvgMen})
-  scatterListWomen.push({axis: "Juniors", value : avgWomenJunior / sumAvgWomen})
+  scatterListMen.push({axis: "Juniors (18-)", value : avgMenJunior / sumAvgMen})
+  scatterListWomen.push({axis: "Juniors (18-)", value : avgWomenJunior / sumAvgWomen})
 
-  scatterListMen.push({ axis: "Adolocents", value: avgMenAdolecents / sumAvgMen})
-  scatterListWomen.push({ axis: "AdolocentsWomen", value : avgWomenAdolecents / sumAvgWomen})
+  scatterListMen.push({ axis: "Adolocents (18 - 36)", value: avgMenAdolecents / sumAvgMen})
+  scatterListWomen.push({ axis: "AdolocentsWomen (18 - 36)", value : avgWomenAdolecents / sumAvgWomen})
 
-  scatterListMen.push({ axis: "Adults", value: avgMenAdults / sumAvgMen})
-  scatterListWomen.push({ axis:"Adults", value : avgWomenAdults / sumAvgWomen})
+  scatterListMen.push({ axis: "Adults (36 - 54)", value: avgMenAdults / sumAvgMen})
+  scatterListWomen.push({ axis:"Adults (36 - 54)", value : avgWomenAdults / sumAvgWomen})
 
 
-  scatterListMen.push({ axis: "middleAge", value : avgMenMiddleAge / sumAvgMen})
-  scatterListWomen.push({ axis: "middleAge", value: avgWomenMiddleAge / sumAvgWomen})
+  scatterListMen.push({ axis: "Middle age (54 - 65)", value : avgMenMiddleAge / sumAvgMen})
+  scatterListWomen.push({ axis: "Middle age (54 - 65)", value: avgWomenMiddleAge / sumAvgWomen})
 
-  scatterListMen.push({ axis: "Seniors", value : avgMenSeniors / sumAvgMen})
-  scatterListWomen.push({ axis: "Seniors", value : avgWomenSeniors / sumAvgWomen})
+  scatterListMen.push({ axis: "Seniors (65+)", value : avgMenSeniors / sumAvgMen})
+  scatterListWomen.push({ axis: "Seniors (65+)", value : avgWomenSeniors / sumAvgWomen})
 
 
   scatterList.push(scatterListMen)
