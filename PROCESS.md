@@ -31,3 +31,12 @@ Presentation day
 Today I made a search bar. Here you can look for contesters in the database,
 and the barchart will be updated and the dots in the scatterplot will be
 highlighted accordingly.
+
+# day 12
+Today I splitted the data into parts, such that is it now possible to visualize
+all the data. It is now possible to look up a lifter in the entire database by
+first selecting the first letter of his first name and then looking him up.
+
+# day 13
+Today I made a menu bar, here you can select other pages such as the home page
+and contact page.
