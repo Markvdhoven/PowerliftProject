@@ -37,7 +37,10 @@ function makeLifterInfo(data, lifter){
     prop4 = "Best3SquatKg"
 
     // if data matches specific info push corresponding dict into array
-    if(data.data[info]["Name"] == lifter.Name){
+    if(data.data[info]["Name"] == lifter.Name && data.data[info]["BodyweightKg"] == lifter["BodyweightKg"]
+      && data.data[info]["Best3BenchKg"] == lifter["Best3BenchKg"]
+      && data.data[info]["Best3SquatKg"] == lifter["Best3SquatKg"]
+      && data.data[info]["Best3DeadliftKg"] == lifter["Best3DeadliftKg"]){
       LifterList.push({lift:prop1, value: data.data[info][prop1]})
       LifterList.push({lift:prop2, value: data.data[info][prop2]})
       LifterList.push({lift:prop3, value: data.data[info][prop3]})
@@ -112,7 +115,7 @@ function createBars(svg, LifterList, xscale){
     .attr('class', 'd3-tip')
     .offset([10, 50])
     .html( function(d) {
-      return "<strong>" + "<span style='color:red'>" + d["lift"] + ": " + d["value"] + "</span>" + "</strong>"
+      return "<strong>" + "<h1>"+ "<span style='color:black'>" + d["lift"] + ": " + d["value"] + "kg" + "</span>" + "</h1>" + "</strong>"
     })
 
   // call tooltip

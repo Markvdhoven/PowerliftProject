@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Powerlift project</title>
+    <title>Visualisations: Powerlift project</title>
 
     <!-- D3 library -->
     <script src="https://d3js.org/d3.v3.min.js"></script>
@@ -56,7 +56,7 @@
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">Powerlift Project</a>
+          <a class="navbar-brand" href="index.html">Powerlift Project</a>
         </div>
         <ul class="nav navbar-nav">
           <li><a href="index.html">Home</a></li>
@@ -110,13 +110,15 @@
 
       <div class="col-lg-4" style="height:400px">
         <div id="dropdown">
-          Powerlifting is a strength sport that consists of three attempts at maximal weight
-          on three lifts: squat, bench press, and deadlift. As in the sport of Olympic weightlifting,
-          it involves the athlete attempting a maximal weight single lift of a barbell loaded with weight
-          plates.[1] Powerlifting evolved from a sport known as "odd lifts", which followed the same
-          three-attempt format but used a wider variety of events, akin to strongman competition.
-          Eventually odd lifts became standardized to the current three. Select a lift, sex and
-          equipement and you can see the visualisations!
+          This visualisations can be used the following way: bellow you can select the lift,
+          gender of the lifters and the equipment that is used. When submitted, these qualities
+          will be shown in the scatterplot. When you click on a dot in the scatterplot, the
+          barchart will show the personal results of that powerlifter. The radarchart
+          bellow the scatterplot will correspond to the gender and the lift that you submitted,
+          and will show results of all equipment with these qualities accordingly.
+          When you click on a box in the boxplot, the spiderchart on the buttom of the page
+          will be updated.  The spiderchart shows the results of lifters for each age group,
+          with the equipment that you selected (clicked on) in the boxplot graph.
           <p><span><label for="y-axis">Select lift</label></span>
           <select id="lift">
             <option value="Best3SquatKg">Squat</option>

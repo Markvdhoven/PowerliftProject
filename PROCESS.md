@@ -40,3 +40,7 @@ first selecting the first letter of his first name and then looking him up.
 # day 13
 Today I made a menu bar, here you can select other pages such as the home page
 and contact page.
+
+# day 14
+Today I finished the home page and the contact page. I also made some small changes
+the the visualisations, such as a different hoovering style.

@@ -21,12 +21,18 @@ body {
   font: 10px sans-serif;
 }
 
+
 .box line,
 .box rect,
+
 .box circle {
   fill: CornflowerBlue;
   stroke: #000;
   stroke-width: 1px;
+}
+
+.box circle:hover {
+  opacity:0.5;
 }
 
 .box .center {
@@ -44,11 +50,17 @@ body {
   stroke: CornflowerBlue;
   z-index: 1
 }
-.dot1 {
 
+.dot:hover {
+  opacity: 0.5;
   position: absolute;
-  stroke: Black;
-  fill: Red;
+  stroke: CornflowerBlue;
+  z-index: 2
+}
+
+.dot1 {
+  position: absolute;
+  stroke: red;
   z-index: 2
 }
 
@@ -87,7 +99,7 @@ body {
 
 /* stylesheet for hovering */
 .bar:hover {
-  fill: lightgrey;
+  opacity: 0.5;
 }
 
 /* stylesheet for axes*/
