@@ -123,6 +123,7 @@ var legend = svg.append("g")
 	.attr("width", 200)
 	.attr('transform', 'translate(90,20)')
 	;
+  
   //Create colour squares
   legend.selectAll('rect')
     .data(LegendOptions)
@@ -134,6 +135,7 @@ var legend = svg.append("g")
     .attr("height", 10)
     .style("fill", function(d, i){ return colorscale(i);})
     ;
+
 	//Create text next to squares
 	legend.selectAll('text')
 	  .data(LegendOptions)

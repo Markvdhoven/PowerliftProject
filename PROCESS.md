@@ -44,3 +44,9 @@ and contact page.
 # day 14
 Today I finished the home page and the contact page. I also made some small changes
 the the visualisations, such as a different hoovering style.
+
+# day 15
+Presentation day
+
+# day 16
+Today I changed the code such that the barcharts gets updated instead of removed. Also I made the search bar case insensitive. 
