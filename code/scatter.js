@@ -12,7 +12,7 @@ function makeGraph(data, lift, sex, equipment, lifter){
     if(sex == "all"){
       for(var i = 0; i < lengthOfArray; i++){
         selecteddata.push(data.data[i])
-        if(data.data[i]["Name"] == lifter){
+        if(data.data[i]["Name"].toUpperCase() == lifter.toUpperCase()){
           lifterList.push(data.data[i])
         }
       }
@@ -21,7 +21,7 @@ function makeGraph(data, lift, sex, equipment, lifter){
       for(var i = 0; i < lengthOfArray; i++){
         if(data.data[i].Sex == sex){
           selecteddata.push(data.data[i])
-          if(data.data[i]["Name"] == lifter){
+          if(data.data[i]["Name"].toUpperCase() == lifter.toUpperCase()){
             lifterList.push(data.data[i])
           }
         }
@@ -34,7 +34,7 @@ function makeGraph(data, lift, sex, equipment, lifter){
       for(var i = 0; i < lengthOfArray; i++){
         if(data.data[i].Equipment == equipment){
         selecteddata.push(data.data[i])
-        if(data.data[i]["Name"] == lifter){
+        if(data.data[i]["Name"].toUpperCase() == lifter.toUpperCase()){
           lifterList.push(data.data[i])
         }
         }
@@ -44,7 +44,7 @@ function makeGraph(data, lift, sex, equipment, lifter){
       for(var i = 0; i < lengthOfArray; i++){
         if(data.data[i].Equipment == equipment && data.data[i].Sex == sex){
         selecteddata.push(data.data[i])
-        if(data.data[i]["Name"] == lifter){
+        if(data.data[i]["Name"].toUpperCase() == lifter.toUpperCase()){
           lifterList.push(data.data[i])
         }
         }
@@ -129,7 +129,7 @@ function makeGraph(data, lift, sex, equipment, lifter){
         .attr("cx", function(d) { return isNaN(d.BodyweightKg) ? 0: x(d.BodyweightKg); })
         .attr("cy", function(d) { return y(d[lift]); })
         // .style("fill", function(d) { return color(cValue(d));})
-        .on("click", function(d){ makeBarChart(d, data)})
+        .on("click", function(d){ updateChart(svgChart, d, data)})
         .on("mouseover", function(d) {
           tooltip.transition()
                .duration(200)
@@ -160,7 +160,7 @@ function makeGraph(data, lift, sex, equipment, lifter){
       .attr("cx", function(d) { return isNaN(d.BodyweightKg) ? 0: x(d.BodyweightKg); })
       .attr("cy", function(d) { return y(d[lift]); })
       // .style("fill", function(d) { return color(cValue(d));})
-      .on("click", function(d){ makeBarChart(d, data)})
+      .on("click", function(d){ updateChart(svg ,d, data)})
       .on("mouseover", function(d) {
         tooltip.transition()
              .duration(200)

@@ -1,32 +1,36 @@
 function makeBarChart(lifter, data){
   // remove old barchart if there is one
-  d3.select("#oldbar").remove();
 
-  var svg = d3.select('#barchart')
+  window.svgChart = d3.select('#barchart')
     .append("svg")
     .attr("width", 500)
     .attr("height", 500)
     .attr("id", "oldbar")
 
-    makeLifterInfo(data, lifter)
-
-    // this scale is used for both x-axis and bars
-    var xscale = d3.scale.ordinal().rangeRoundBands([50, 250], .03)
-      .domain(LifterList.map(function(d) { return d["lift"]; }));
-
-    // make corrresponding axes
-    createAxis(svg, LifterList, xscale)
-
-    // make corrresponding bars
-    createBars(svg, LifterList, xscale)
-
-    // make corrresponding title
-    createTitle(svg, lifter)
-
+  updateChart(svgChart, lifter, data)
 
 }
 
-function makeLifterInfo(data, lifter){
+function updateChart(svg, lifter, data){
+  LifterList = makeLifterInfo(lifter, data)
+
+  // this scale is used for both x-axis and bars
+  var xscale = d3.scale.ordinal().rangeRoundBands([50, 250], .03)
+    .domain(LifterList.map(function(d) { return d["lift"]; }));
+
+  // make corrresponding axes
+  createAxis(svg, LifterList, xscale)
+
+  // make corrresponding bars
+  createBars(svg, LifterList, xscale)
+
+  // make corrresponding title
+  createTitle(svg, lifter)
+}
+
+
+function makeLifterInfo(lifter, data){
+  console.log(lifter)
   LifterList = []
 
   // iterate over data
@@ -71,8 +75,8 @@ function createAxis(svg, LifterList, xscale){
     .attr("class", "axis")
     .attr("transform", "translate(0," + 375 + ")")
     .call(d3.svg.axis()
-    .scale(xscale)
-    .orient("bottom"))
+      .scale(xscale)
+      .orient("bottom"))
     .selectAll("text")
     .attr("y", 0)
     .attr("x", 9)
@@ -86,19 +90,18 @@ function createAxis(svg, LifterList, xscale){
     .orient("left")
     .ticks(5);
 
+  svg.select(".y").remove()
+
   // call y-axis and attributes
   svg.append("g")
-    .attr("class", "axis")
+    .attr("class", "y axis")
     .attr("transform", "translate(" + 40 + ",30)")
     .call(yAxis)
-
-   // create y-axis title
-   svg.append("g")
      .append("text")
      .attr("transform", "rotate(-90)")
-     .attr("y", 50)
-     .attr("x", -30)
-     .attr("dy", ".15em")
+     .attr("y", 6)
+     .attr("x", 0)
+     .attr("dy", ".35em")
      .attr("font-size", "11px")
      .style("text-anchor", "end")
      .text("Kilograms");
@@ -126,10 +129,11 @@ function createBars(svg, LifterList, xscale){
     .domain([0, d3.max(LifterList, function(d) {return parseInt(d["value"]); })])
     .range([0, 340]);
 
+  var bar = d3.select("#oldbar").selectAll(".bar")
+    .data(LifterList, function(d) {return xscale(d["lift"]); })
+
   // create bar for each data-element
-  svg.selectAll(".bar")
-    .data(LifterList)
-    .enter()
+  bar.enter()
     .append("rect")
     .attr("fill", "green")
     .attr("class", "bar")
@@ -150,14 +154,24 @@ function createBars(svg, LifterList, xscale){
      // show tooltip when mouseover
     .on('mouseover', tip.show)
     .on('mouseout', tip.hide);
+
+  bar.exit().remove();
+
+  bar.transition()
+     .duration(750)
+     .attr("y", function(d) { return 370 - scale(d.value); })
+     .attr("height", function(d) { return scale(d.value); });
 }
 
 /*
 * function which makes barchart title
 **/
 function createTitle(svg, lifter){
+  svg.select(".title").remove()
+
   svg.append("g")
     .attr("transform", "translate(" + (350/2) + ", 15)")
+    .attr("class", "title")
     .append("text")
     .text("Lifts of " + lifter["Name"] + ", "+ lifter["Equipment"])
     .style({"text-anchor":"middle", "font-family":"Arial", "font-weight":"800", "font-size": "12px"});
@@ -172,8 +186,8 @@ function setBar(){
     var searchValue = document.getElementById("competetorName").value
 
     for(var i = 0; i < data.data.length; i++){
-      if(data.data[i]["Name"] == searchValue){
-        makeBarChart(data.data[i], data)
+      if(data.data[i]["Name"].toUpperCase() == searchValue.toUpperCase()){
+        updateChart(svgChart, data.data[i], data)
         count += 1;
       }
     }

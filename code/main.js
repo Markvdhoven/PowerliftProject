@@ -1,4 +1,4 @@
-var buttonValue = "data/powerliftdataAB.json"
+var buttonValue = "data/powerliftdataUV.json"
 
 function main(lift, sex, equipment){
   d3.json(buttonValue, function(error, data) {
@@ -78,7 +78,6 @@ function readData(buttonValue){
 
     boxPlot(data, lift, sex)
     makeGraph(data, lift, sex, equipment, "none")
-    makeBarChart(data.data[1], data)
     spiderChart(data, equipment, lift)
   })
 }
