@@ -24,13 +24,19 @@ function updateChart(svg, lifter, data){
   // make corrresponding bars
   createBars(svg, LifterList, xscale)
 
-  // make corrresponding title
-  createTitle(svg, lifter)
+  svg.select(".title").remove()
+
+  svg.append("g")
+    .attr("transform", "translate(" + (350/2) + ", 15)")
+    .attr("class", "title")
+    .append("text")
+    .text("Lifts of " + lifter["Name"] + ", "+ lifter["Equipment"])
+    .style({"text-anchor":"middle", "font-family":"Arial", "font-weight":"800", "font-size": "12px"});
+
 }
 
 
 function makeLifterInfo(lifter, data){
-  console.log(lifter)
   LifterList = []
 
   // iterate over data
@@ -163,20 +169,6 @@ function createBars(svg, LifterList, xscale){
      .attr("height", function(d) { return scale(d.value); });
 }
 
-/*
-* function which makes barchart title
-**/
-function createTitle(svg, lifter){
-  svg.select(".title").remove()
-
-  svg.append("g")
-    .attr("transform", "translate(" + (350/2) + ", 15)")
-    .attr("class", "title")
-    .append("text")
-    .text("Lifts of " + lifter["Name"] + ", "+ lifter["Equipment"])
-    .style({"text-anchor":"middle", "font-family":"Arial", "font-weight":"800", "font-size": "12px"});
-}
-
 function setBar(){
   d3.json(buttonValue, function(error, data) {
     if (error) throw error;
@@ -195,7 +187,7 @@ function setBar(){
     console.log($('#sex').val())
     console.log($('#equipment').val())
 
-    makeGraph(data, $('#lift').val(), $('#sex').val(), $('#equipment').val(), searchValue)
+    updateScatter(svgScatter, data, $('#lift').val(), $('#sex').val(), $('#equipment').val(), searchValue)
     if(count == 0) alert('No such competetor')
     if(count == 0) throw new Error('There is no such competator');
 

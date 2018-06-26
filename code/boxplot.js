@@ -10,59 +10,7 @@ function boxPlot(data, lift, sex){
   var min = Infinity,
       max = -Infinity;
 
-  LiftList = []
-
-
-  // iterate over data
-  for(var info = 0; info < data.data.length; info++){
-      equipment = data.data[info]["Equipment"]
-      if(equipment == "Raw"){
-        if(sex == "all"){
-          LiftList.push({"Raw":data.data[info][lift],"Wraps":"","Single-ply":"","Multi-ply":""})
-        }
-        else if(sex != "all"){
-          if(data.data[info]["Sex"] == sex){
-            LiftList.push({"Raw":data.data[info][lift],"Wraps":"","Single-ply":"","Multi-ply":""})
-          }
-        }
-      }
-
-      if(equipment == "Wraps"){
-        if(sex == "all"){
-          LiftList.push({"Raw":"", "Wraps":data.data[info][lift], "Single-ply":"", "Multi-ply":""})
-        }
-        else if(sex != "all"){
-          if(data.data[info]["Sex"] == sex){
-            LiftList.push({"Raw":"","Wraps":data.data[info][lift],"Single-ply":"","Multi-ply":""})
-          }
-        }
-      }
-
-      if(equipment == "Single-ply"){
-        if(sex == "all"){
-          LiftList.push({"Raw":"", "Wraps":"", "Single-ply":data.data[info][lift], "Multi-ply":""})
-        }
-        else if(sex != "all"){
-          if(data.data[info]["Sex"] == sex){
-            LiftList.push({"Raw":"", "Wraps":"", "Single-ply":data.data[info][lift], "Multi-ply":""})
-          }
-        }
-      }
-
-
-      if(equipment == "Multi-ply"){
-        if(sex == "all"){
-          LiftList.push({"Raw":"", "Wraps":"", "Single-ply":"", "Multi-ply":data.data[info][lift]})
-        }
-        else if(sex != "all"){
-          if(data.data[info]["Sex"] == sex){
-            LiftList.push({"Raw":"", "Wraps":"", "Single-ply":"", "Multi-ply":data.data[info][lift]})
-          }
-        }
-      }
-  }
-
-
+  liftList = createBoxData(data, lift, sex)
 
   var info = [];
   info[0] = [];
@@ -74,7 +22,6 @@ function boxPlot(data, lift, sex){
   info[1][0] = "Wraps";
   info[2][0] = "Single-ply";
   info[3][0] = "Multi-ply";
-
 
   info[0][1] = [];
 	info[1][1] = [];
@@ -137,50 +84,46 @@ function boxPlot(data, lift, sex){
     .scale(y)
     .orient("left");
 
-
   svg.selectAll(".box")
       .data(info)
 	    .enter().append("g")
 		  .attr("transform", function(d) { return "translate(" +  x(d[0])  + "," + margin.top + ")"; } )
       .call(chart.width(x.rangeBand()));
 
-      // add a title
-  	svg.append("text")
-          .attr("x", (width / 2))
-          .attr("y", 0 + (margin.top / 2))
-          .attr("text-anchor", "middle")
-          .text("Lifts per equipment, " + lift + ", sex: " + sex )
-          .style({"text-anchor":"middle", "font-family":"Arial", "font-weight":"800", "font-size": "12px"});
+  // add a title
+	svg.append("text")
+        .attr("x", (width / 2))
+        .attr("y", 0 + (margin.top / 2))
+        .attr("text-anchor", "middle")
+        .text("Lifts per equipment, " + lift + ", sex: " + sex )
+        .style({"text-anchor":"middle", "font-family":"Arial", "font-weight":"800", "font-size": "12px"});
 
-  	 // draw y axis
-  	svg.append("g")
-        .attr("class", "y axis")
-        .call(yAxis)
-  		  .append("text") // and text1
-        .attr("class", "label")
-  		  .attr("transform", "rotate(-90)")
-  		  .attr("y", 6)
-  		  .attr("dy", ".71em")
-  		  .style("text-anchor", "end")
-  		  .style("font-size", "12px")
-  		  .text("Kilograms");
+	 // draw y axis
+	svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+		  .append("text") // and text1
+      .attr("class", "label")
+		  .attr("transform", "rotate(-90)")
+		  .attr("y", 6)
+		  .attr("dy", ".71em")
+		  .style("text-anchor", "end")
+		  .style("font-size", "12px")
+		  .text("Kilograms");
 
-  	// draw x axis
-  	svg.append("g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0," + (height  + margin.top + 10) + ")")
-        .call(xAxis)
-  	    .append("text")
-        .attr("class", "label")           // text label for the x axis
-        .attr("x", (width / 2) )
-        .attr("y",  10 )
-  		  .attr("dy", ".71em")
-        .style("text-anchor", "middle")
-  		  .style("font-size", "12px")
-        .text("Equipment");
-
-
-
+	// draw x axis
+	svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + (height  + margin.top + 10) + ")")
+      .call(xAxis)
+	    .append("text")
+      .attr("class", "label")           // text label for the x axis
+      .attr("x", (width / 2) )
+      .attr("y",  10 )
+		  .attr("dy", ".71em")
+      .style("text-anchor", "middle")
+		  .style("font-size", "12px")
+      .text("Equipment");
 }
 
 function iqr(k) {
@@ -194,4 +137,58 @@ function iqr(k) {
     while (d[--j] > q3 + iqr);
     return [i, j];
   };
+}
+
+function createBoxData(data, lift, sex){
+  LiftList = []
+
+
+  // iterate over data
+  for(var info = 0; info < data.data.length; info++){
+      equipment = data.data[info]["Equipment"]
+      if(equipment == "Raw"){
+        if(sex == "all"){
+          LiftList.push({"Raw":data.data[info][lift],"Wraps":"","Single-ply":"","Multi-ply":""})
+        }
+        else if(sex != "all"){
+          if(data.data[info]["Sex"] == sex){
+            LiftList.push({"Raw":data.data[info][lift],"Wraps":"","Single-ply":"","Multi-ply":""})
+          }
+        }
+      }
+
+      if(equipment == "Wraps"){
+        if(sex == "all"){
+          LiftList.push({"Raw":"", "Wraps":data.data[info][lift], "Single-ply":"", "Multi-ply":""})
+        }
+        else if(sex != "all"){
+          if(data.data[info]["Sex"] == sex){
+            LiftList.push({"Raw":"","Wraps":data.data[info][lift],"Single-ply":"","Multi-ply":""})
+          }
+        }
+      }
+
+      if(equipment == "Single-ply"){
+        if(sex == "all"){
+          LiftList.push({"Raw":"", "Wraps":"", "Single-ply":data.data[info][lift], "Multi-ply":""})
+        }
+        else if(sex != "all"){
+          if(data.data[info]["Sex"] == sex){
+            LiftList.push({"Raw":"", "Wraps":"", "Single-ply":data.data[info][lift], "Multi-ply":""})
+          }
+        }
+      }
+
+
+      if(equipment == "Multi-ply"){
+        if(sex == "all"){
+          LiftList.push({"Raw":"", "Wraps":"", "Single-ply":"", "Multi-ply":data.data[info][lift]})
+        }
+        else if(sex != "all"){
+          if(data.data[info]["Sex"] == sex){
+            LiftList.push({"Raw":"", "Wraps":"", "Single-ply":"", "Multi-ply":data.data[info][lift]})
+          }
+        }
+      }
+  }
 }

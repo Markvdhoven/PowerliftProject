@@ -49,4 +49,8 @@ the the visualisations, such as a different hoovering style.
 Presentation day
 
 # day 16
-Today I changed the code such that the barcharts gets updated instead of removed. Also I made the search bar case insensitive. 
+Today I changed the code such that the barcharts gets updated instead of removed. Also I made the search bar case insensitive.
+
+# day 17
+Today I changed to code such that the scatterplot gets updated instead of removed.
+Also I made more small function in the code instead of very large functions. 

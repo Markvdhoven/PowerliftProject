@@ -4,10 +4,6 @@ function spiderChart(data, equipment, lift){
 
   var colorscale = d3.scale.category20();
 
-  //Legend titles
-  var LegendOptions = ['Male', 'Female'];
-
-
   var scatterList = []
   var scatterListMen = []
   var scatterListWomen = []
@@ -21,15 +17,12 @@ function spiderChart(data, equipment, lift){
   }
   else avgWomenJunior = selectDataUnder18(data, equipment, lift)[1];
 
-  console.log("jun", avgWomenJunior)
-
   sumAvgMen += avgMenJunior
   sumAvgWomen += avgWomenJunior
 
 
   avgMenAdolecents =  selectDataAge1toAge2(data, equipment, lift, 18, 36)[0]
   avgWomenAdolecents =  selectDataAge1toAge2(data, equipment, lift, 18, 36)[1]
-  console.log("adol", avgWomenAdolecents)
 
   sumAvgMen += avgMenAdolecents
   sumAvgWomen += avgWomenAdolecents
@@ -37,7 +30,6 @@ function spiderChart(data, equipment, lift){
 
   avgMenAdults =  selectDataAge1toAge2(data, equipment, lift, 36, 54)[0]
   avgWomenAdults =  selectDataAge1toAge2(data, equipment, lift, 36, 54)[1]
-  console.log("adul", avgWomenAdults)
 
   sumAvgMen += avgMenAdults
   sumAvgWomen += avgWomenAdults
@@ -49,7 +41,6 @@ function spiderChart(data, equipment, lift){
     avgWomenMiddleAge = 0
   }
   else avgWomenMiddleAge =  selectDataAge1toAge2(data, equipment, lift, 54, 65)[1];
-  console.log("mid", avgWomenMiddleAge)
 
   sumAvgMen += avgMenMiddleAge
   sumAvgWomen += avgWomenMiddleAge
@@ -61,12 +52,10 @@ function spiderChart(data, equipment, lift){
   }
   else avgWomenSeniors =  selectDataOver64(data, equipment, lift)[1];
 
-  console.log("sen", avgWomenSeniors)
 
   sumAvgMen += avgMenSeniors
   sumAvgWomen += avgWomenSeniors
 
-  console.log("sumwomen", sumAvgWomen)
 
   scatterListMen.push({axis: "Juniors (18-)", value : avgMenJunior / sumAvgMen})
   scatterListWomen.push({axis: "Juniors (18-)", value : avgWomenJunior / sumAvgWomen})
@@ -105,48 +94,7 @@ var svg = d3.select('#chart')
 	.attr("width", w+300)
 	.attr("height", h)
 
-//Create the title for the legend
-var text = svg.append("text")
-	.attr("class", "title")
-	.attr('transform', 'translate(90,0)')
-	.attr("x", w - 70)
-	.attr("y", 10)
-	.attr("font-size", "12px")
-	.attr("fill", "#404040")
-	.text("What % does a age-group lift (" + equipment + ")")
-  .style({"text-anchor":"middle", "font-family":"Arial", "font-weight":"800", "font-size": "12px"});
-
-//Initiate Legend
-var legend = svg.append("g")
-	.attr("class", "legend")
-	.attr("height", 100)
-	.attr("width", 200)
-	.attr('transform', 'translate(90,20)')
-	;
-  
-  //Create colour squares
-  legend.selectAll('rect')
-    .data(LegendOptions)
-    .enter()
-    .append("rect")
-    .attr("x", w - 65)
-    .attr("y", function(d, i){ return i * 20;})
-    .attr("width", 10)
-    .attr("height", 10)
-    .style("fill", function(d, i){ return colorscale(i);})
-    ;
-
-	//Create text next to squares
-	legend.selectAll('text')
-	  .data(LegendOptions)
-	  .enter()
-	  .append("text")
-	  .attr("x", w - 52)
-	  .attr("y", function(d, i){ return i * 20 + 9;})
-	  .attr("font-size", "11px")
-	  .attr("fill", "#737373")
-	  .text(function(d) { return d; })
-	  ;
+  makeLegend(svg, w, colorscale)
 
 }
 
@@ -256,4 +204,52 @@ function selectDataOver64(data, equipment, lift){
   var avgWomen = sumWomen / liftListWomen.length
 
   return [avgMen, avgWomen]
+}
+
+function makeLegend(svg, w, colorscale){
+  //Create the title for the legend
+  var text = svg.append("text")
+  	.attr("class", "title")
+  	.attr('transform', 'translate(90,0)')
+  	.attr("x", w - 70)
+  	.attr("y", 10)
+  	.attr("font-size", "12px")
+  	.attr("fill", "#404040")
+  	.text("What % does a age-group lift (" + equipment + ")")
+    .style({"text-anchor":"middle", "font-family":"Arial", "font-weight":"800", "font-size": "12px"});
+
+  //Legend titles
+  var LegendOptions = ['Male', 'Female'];
+
+  //Initiate Legend
+  var legend = svg.append("g")
+  	.attr("class", "legend")
+  	.attr("height", 100)
+  	.attr("width", 200)
+  	.attr('transform', 'translate(90,20)')
+  	;
+
+    //Create colour squares
+    legend.selectAll('rect')
+      .data(LegendOptions)
+      .enter()
+      .append("rect")
+      .attr("x", w - 65)
+      .attr("y", function(d, i){ return i * 20;})
+      .attr("width", 10)
+      .attr("height", 10)
+      .style("fill", function(d, i){ return colorscale(i);})
+      ;
+
+  	//Create text next to squares
+  	legend.selectAll('text')
+  	  .data(LegendOptions)
+  	  .enter()
+  	  .append("text")
+  	  .attr("x", w - 52)
+  	  .attr("y", function(d, i){ return i * 20 + 9;})
+  	  .attr("font-size", "11px")
+  	  .attr("fill", "#737373")
+  	  .text(function(d) { return d; })
+  	  ;
 }

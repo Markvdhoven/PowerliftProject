@@ -70,14 +70,13 @@ function buttonMainWXYZ(){
 function readData(buttonValue){
   lift = $('#lift').val()
   sex = $('#sex').val()
-  equipment = $('#equipment').val()
-
+  let equipmentInReadData = $('#equipment').val()
 
   d3.json(buttonValue, function(error, data) {
     if (error) throw error;
 
     boxPlot(data, lift, sex)
-    makeGraph(data, lift, sex, equipment, "none")
+    updateScatter(svgScatter, data, lift, sex, equipmentInReadData, "none")
     spiderChart(data, equipment, lift)
   })
 }
