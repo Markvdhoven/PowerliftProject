@@ -8,6 +8,6 @@ dot, the personal results of this contesters in shown in the barchart. The
 boxplot shows the results per equipment. When you click on a box in this boxplots,
 the results per age devision can be seen in the spiderchart (for this devision).
 
-[sketch](https://github.com/Markvdhoven/PowerliftProject/blob/master/doc/DESIGN1.JPG)
+![alt text](https://github.com/Markvdhoven/PowerliftProject/blob/master/doc/DESIGN1.JPG)
 
-[sketch](https://github.com/Markvdhoven/PowerliftProject/blob/master/doc/DESIGN2.JPG)
+![alt text](https://github.com/Markvdhoven/PowerliftProject/blob/master/doc/DESIGN2.JPG)
