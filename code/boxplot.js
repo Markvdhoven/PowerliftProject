@@ -1,3 +1,9 @@
+/**
+ * Creates svg element and boxplot for the first time
+ * @param (array) data The entire data of all lifters
+ * @param (string) lift The lift for which you want to create the boxplot
+ * @param (string) sex The gender for which you want to create the boxplot
+ */
 function boxPlot(data, lift, sex){
   d3.select("#oldboxplot").remove();
 
@@ -54,78 +60,28 @@ function boxPlot(data, lift, sex){
 		if (rowMin < min) min = rowMin;
   });
 
-  var chart = d3.box(data, lift)
-		.whiskers(iqr(1.5))
-		.height(height)
-		.domain([min, max])
-		.showLabels(labels);
+  var chart = createBoxChart(data, lift, height, min, max, labels)
 
-  var svg = d3.select("#boxplot").append("svg")
-		.attr("width", width + margin.left + margin.right)
-		.attr("height", height + margin.top + margin.bottom)
-		.attr("class", "box")
-    .attr("id", "oldboxplot")
-		.append("g")
-		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  var svg = createBoxSVG(width, height, margin)
 
   var x = d3.scale.ordinal()
 		.domain(info.map(function(d) { return d[0] } ) )
 		.rangeRoundBands([0 , width], 0.7, 0.3);
 
-  var xAxis = d3.svg.axis()
-		.scale(x)
-		.orient("bottom");
-
   var y = d3.scale.linear()
 		.domain([min, max])
 		.range([height + margin.top, 0 + margin.top]);
 
-	var yAxis = d3.svg.axis()
-    .scale(y)
-    .orient("left");
+  drawChart(svg, margin, chart, info, x)
 
-  svg.selectAll(".box")
-      .data(info)
-	    .enter().append("g")
-		  .attr("transform", function(d) { return "translate(" +  x(d[0])  + "," + margin.top + ")"; } )
-      .call(chart.width(x.rangeBand()));
+  addBoxTitle(svg, width, margin, lift, sex)
 
-  // add a title
-	svg.append("text")
-        .attr("x", (width / 2))
-        .attr("y", 0 + (margin.top / 2))
-        .attr("text-anchor", "middle")
-        .text("Lifts per equipment, " + lift + ", sex: " + sex )
-        .style({"text-anchor":"middle", "font-family":"Arial", "font-weight":"800", "font-size": "12px"});
-
-	 // draw y axis
-	svg.append("g")
-      .attr("class", "y axis")
-      .call(yAxis)
-		  .append("text") // and text1
-      .attr("class", "label")
-		  .attr("transform", "rotate(-90)")
-		  .attr("y", 6)
-		  .attr("dy", ".71em")
-		  .style("text-anchor", "end")
-		  .style("font-size", "12px")
-		  .text("Kilograms");
-
-	// draw x axis
-	svg.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + (height  + margin.top + 10) + ")")
-      .call(xAxis)
-	    .append("text")
-      .attr("class", "label")           // text label for the x axis
-      .attr("x", (width / 2) )
-      .attr("y",  10 )
-		  .attr("dy", ".71em")
-      .style("text-anchor", "middle")
-		  .style("font-size", "12px")
-      .text("Equipment");
+  drawBoxAxes(svg, height, width, margin, x, y)
 }
 
+/**
+ * Sets box quartiles
+ */
 function iqr(k) {
   return function(d, i) {
     var q1 = d.quartiles[0],
@@ -139,9 +95,11 @@ function iqr(k) {
   };
 }
 
+/**
+ * Formats data for the boxplots
+ */
 function createBoxData(data, lift, sex){
   LiftList = []
-
 
   // iterate over data
   for(var info = 0; info < data.data.length; info++){
@@ -179,7 +137,6 @@ function createBoxData(data, lift, sex){
         }
       }
 
-
       if(equipment == "Multi-ply"){
         if(sex == "all"){
           LiftList.push({"Raw":"", "Wraps":"", "Single-ply":"", "Multi-ply":data.data[info][lift]})
@@ -191,4 +148,89 @@ function createBoxData(data, lift, sex){
         }
       }
   }
+}
+
+/**
+ * Adds title
+ */
+function addBoxTitle(svg, width, margin, lift, sex){
+  svg.append("text")
+        .attr("x", (width / 2))
+        .attr("y", 0 + (margin.top / 2))
+        .attr("text-anchor", "middle")
+        .text("Lifts per equipment, " + lift + ", sex: " + sex )
+        .style({"text-anchor":"middle", "font-family":"Arial", "font-weight":"800", "font-size": "12px"});
+
+}
+
+/**
+ * Adds axes
+ */
+function drawBoxAxes(svg, height, width, margin, x ,y){
+
+  var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+  var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");
+
+  // draw y axis
+ svg.append("g")
+     .attr("class", "y axis")
+     .call(yAxis)
+     .append("text") // and text1
+     .attr("class", "label")
+     .attr("transform", "rotate(-90)")
+     .attr("y", 6)
+     .attr("dy", ".71em")
+     .style("text-anchor", "end")
+     .style("font-size", "12px")
+     .text("Kilograms");
+
+ // draw x axis
+ svg.append("g")
+     .attr("class", "x axis")
+     .attr("transform", "translate(0," + (height  + margin.top + 10) + ")")
+     .call(xAxis)
+     .append("text")
+     .attr("class", "label")
+     .attr("x", (width / 2) )
+     .attr("y",  10 )
+     .attr("dy", ".71em")
+     .style("text-anchor", "middle")
+     .style("font-size", "12px")
+     .text("Equipment");
+}
+
+function createBoxSVG(width, height, margin){
+    var svg = d3.select("#boxplot").append("svg")
+  		.attr("width", width + margin.left + margin.right)
+  		.attr("height", height + margin.top + margin.bottom)
+  		.attr("class", "box")
+      .attr("id", "oldboxplot")
+  		.append("g")
+  		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    return svg
+
+}
+
+function createBoxChart(data, lift, height, min, max, labels){
+  var chart = d3.box(data, lift)
+    .whiskers(iqr(1.5))
+    .height(height)
+    .domain([min, max])
+    .showLabels(labels);
+
+    return chart
+}
+
+function drawChart(svg, margin, chart, info, x){
+  svg.selectAll(".box")
+      .data(info)
+      .enter().append("g")
+      .attr("transform", function(d) { return "translate(" +  x(d[0])  + "," + margin.top + ")"; } )
+      .call(chart.width(x.rangeBand()));
 }

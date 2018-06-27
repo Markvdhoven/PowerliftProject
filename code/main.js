@@ -1,5 +1,12 @@
+// default data when opening visualisations for the first time
 var buttonValue = "data/powerliftdataUV.json"
 
+/**
+ * Main function which creates visualisations for the first time
+ * @param (string) lift The lift for which you want to create visualisations
+ * @param (string) sex The gender for which you want to create visualisations
+ * @param (string) equipment The equipment for which you want to create visualisations
+ */
 function main(lift, sex, equipment){
   d3.json(buttonValue, function(error, data) {
     if (error) throw error;
@@ -10,14 +17,15 @@ function main(lift, sex, equipment){
     makeBarChart(data.data[1], data)
 
     spiderChart(data, equipment, lift)
-
-
   })
 }
-//
+
+
 main("Best3SquatKg", "M", "Raw")
 
-
+/**
+ * Functions that creates new visualisations based on data selected
+ */
 function buttonMainAB(){
   window.buttonValue = document.getElementById("clickAB").value
   readData(buttonValue)
@@ -67,6 +75,9 @@ function buttonMainWXYZ(){
   readData(buttonValue)
 }
 
+/**
+ * Function that updates visualisations based on data selected
+ */
 function readData(buttonValue){
   lift = $('#lift').val()
   sex = $('#sex').val()

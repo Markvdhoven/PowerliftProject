@@ -1,6 +1,11 @@
+/**
+ * Creates svg element and bar chart for the first time
+ * @param (array) lifter The lifter for which you want to create the barchart
+ * @param (array) data The entire data of all lifters
+ */
 function makeBarChart(lifter, data){
-  // remove old barchart if there is one
 
+  // remove old barchart if there is one
   window.svgChart = d3.select('#barchart')
     .append("svg")
     .attr("width", 500)
@@ -8,9 +13,14 @@ function makeBarChart(lifter, data){
     .attr("id", "oldbar")
 
   updateChart(svgChart, lifter, data)
-
 }
 
+/**
+ * Updates the bar chart
+ * @param (var) svg The svg element in which you want to update the barchart
+ * @param (array) lifter The lifter for which you want to create the barchart
+ * @param (array) data The entire data of all lifters
+ */
 function updateChart(svg, lifter, data){
   LifterList = makeLifterInfo(lifter, data)
 
@@ -18,14 +28,13 @@ function updateChart(svg, lifter, data){
   var xscale = d3.scale.ordinal().rangeRoundBands([50, 250], .03)
     .domain(LifterList.map(function(d) { return d["lift"]; }));
 
-  // make corrresponding axes
   createAxis(svg, LifterList, xscale)
 
-  // make corrresponding bars
   createBars(svg, LifterList, xscale)
 
   svg.select(".title").remove()
 
+  // create title
   svg.append("g")
     .attr("transform", "translate(" + (350/2) + ", 15)")
     .attr("class", "title")
@@ -35,7 +44,12 @@ function updateChart(svg, lifter, data){
 
 }
 
-
+/**
+ * Formats data for the barchart
+ * @param (var) svg The svg element in which you want to update the barchart
+ * @param (array) lifter The lifter for which you want to create the barchart
+ * @returns (list) LifterList A list of all info from one specific lifter
+ */
 function makeLifterInfo(lifter, data){
   LifterList = []
 
@@ -62,6 +76,9 @@ function makeLifterInfo(lifter, data){
   return LifterList
 }
 
+/*
+* Creates axis
+**/
 function createAxis(svg, LifterList, xscale){
 
   // create scale for y-axis
@@ -114,12 +131,12 @@ function createAxis(svg, LifterList, xscale){
 }
 
 /*
-* function which makes barchart bars
+* Creates bars
 **/
 function createBars(svg, LifterList, xscale){
 
   // create tooltip for hoovering
-  // http://bl.ocks.org/Caged/6476579
+  // source: http://bl.ocks.org/Caged/6476579
   var tip = d3.tip()
     .attr('class', 'd3-tip')
     .offset([10, 50])
@@ -169,12 +186,16 @@ function createBars(svg, LifterList, xscale){
      .attr("height", function(d) { return scale(d.value); });
 }
 
+/*
+* Resets barchart and scatterplot when a lifter is being looked up in search bar
+**/
 function setBar(){
   d3.json(buttonValue, function(error, data) {
     if (error) throw error;
 
     var count = 0;
 
+    // get search value
     var searchValue = document.getElementById("competetorName").value
 
     for(var i = 0; i < data.data.length; i++){
@@ -183,11 +204,10 @@ function setBar(){
         count += 1;
       }
     }
-    console.log($('#lift').val())
-    console.log($('#sex').val())
-    console.log($('#equipment').val())
 
     updateScatter(svgScatter, data, $('#lift').val(), $('#sex').val(), $('#equipment').val(), searchValue)
+
+    // check if lifter exists
     if(count == 0) alert('No such competetor')
     if(count == 0) throw new Error('There is no such competator');
 

@@ -1,3 +1,5 @@
+// Inspired by http://bl.ocks.org/nbremer/6506614
+
 var RadarChart = {
   draw: function(id, d, options){
   var cfg = {
@@ -202,6 +204,7 @@ var RadarChart = {
 
 	  series++;
 	});
+  
 	//Tooltip
 	tooltip = g.append('text')
 			   .style('opacity', 0)

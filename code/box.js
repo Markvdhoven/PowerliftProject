@@ -1,4 +1,5 @@
 // Inspired by http://informationandvisualization.de/blog/box-plot
+
 d3.box = function(fulldata, lift) {
   var width = 1,
       height = 1,
