@@ -2,6 +2,10 @@
 Mark van den Hoven 10533133
 **Github page:**  https://Markvdhoven.github.io/PowerliftProject/
 
+Purpose
+--------------------
+The goal of this project is to determine corralition between the bodyweight, equipment and age of lifters and their results in powerlifting.
+
 Usability
 --------------------
 The database consists of 600.000+ competetors. This is why the data is split up into different files. You should first select 
@@ -31,9 +35,6 @@ When a box in the boxplot is clicked on, it will update the spiderchart below. T
 
 ![alt text](https://github.com/Markvdhoven/PowerliftProject/blob/master/doc/README6.JPG)
 
-Purpose
---------------------
-The goal of this project is to determine corralition between the bodyweight, equipment and age of lifters and their results in powerlifting.
 
 Copyright statement
 --------------------
