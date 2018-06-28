@@ -1,7 +1,9 @@
 # PowerliftProject
 Mark van den Hoven 10533133
+
 **View visualisation website here:**  https://Markvdhoven.github.io/PowerliftProject/
-**Product video** https://www.youtube.com/watch?v=ouOSXbxCBjY&feature=youtu.be
+
+**Product video:** https://www.youtube.com/watch?v=ouOSXbxCBjY&feature=youtu.be
 
 Purpose
 --------------------
