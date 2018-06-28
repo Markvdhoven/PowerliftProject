@@ -27,8 +27,14 @@ The boxplots show the results per equipment, based on the lift and sex you selec
 
 ![alt text](https://github.com/Markvdhoven/PowerliftProject/blob/master/doc/README5.JPG)
 
-When a box in the boxplot is clicked on, it will update the spiderchart below. This shows the percentage of the total weight lifter that each age group can lift:
+When a box in the boxplot is clicked on, it will update the spiderchart below. This shows the percentage of the total weight lifted that each age group can lift:
 
 ![alt text](https://github.com/Markvdhoven/PowerliftProject/blob/master/doc/README6.JPG)
 
+Purpose
+--------------------
+The goal of this project is to determine corralition between the bodyweight, equipment and age of lifters and their results in powerlifting.
 
+Copyright statement
+--------------------
+This is a public domain release.
