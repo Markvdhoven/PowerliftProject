@@ -1,6 +1,6 @@
 # PowerliftProject
 Mark van den Hoven 10533133
-**Github page:**  https://Markvdhoven.github.io/PowerliftProject/
+**View visualisation website here:**  https://Markvdhoven.github.io/PowerliftProject/
 
 Purpose
 --------------------
@@ -8,8 +8,8 @@ The goal of this project is to determine corralition between the bodyweight, equ
 
 Usability
 --------------------
-The database consists of 600.000+ competetors. This is why the data is split up into different files. You should first select 
-a database based on the first letter of the first name of the competetor. When you skip the step the visualisations will show all competetors which first names start with U or V (since this is the smallest database so it takes less time to load the page). After this it is also possible to look up a competetor:
+The database consists of 600.000+ competators. This is why the data is split up into different files. You should first select 
+a database based on the first letter of the first name of the competator. When you skip the step the visualisations will show all competators which first names start with U or V (since this is the smallest database so it takes less time to load the page). After this it is also possible to look up a competator:
 
 ![alt text](https://github.com/Markvdhoven/PowerliftProject/blob/master/doc/README1.JPG)
 
