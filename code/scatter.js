@@ -1,3 +1,8 @@
+/*
+* Mark van den Hoven 10533133
+* Here are functions that are correlated to the scatterplot visualisations
+**/
+
 /**
  * Function that creates svg and scatterplot for the first time
  * @param (string) lift The lift for which you want to create scatter
@@ -7,13 +12,13 @@
  */
 function makeGraph(data, lift, sex, equipment, lifter){
   var margin = {top: 20, right: 30, bottom: 30, left: 30},
-      width = 1000 - margin.left - margin.right,
-      height = 400 - margin.top - margin.bottom;
+    width = 1000 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
 
   window.svgScatter = d3.select("#scatter").append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-      .attr("id", "scatterplot")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .attr("id", "scatterplot")
 
   updateScatter(svgScatter, data, lift, sex, equipment, lifter)
 }
@@ -21,36 +26,35 @@ function makeGraph(data, lift, sex, equipment, lifter){
 /**
  * Function that updates scatterplot
  */
-functio
 function updateScatter(svg, data, lift, sex, equipment, lifter){
   console.log(equipment)
   selecteddata = createData(data, lift, sex, equipment, lifter)[0]
   lifterList = createData(data, lift, sex, equipment, lifter)[1]
 
   var margin = {top: 20, right: 30, bottom: 30, left: 30},
-      width = 1000 - margin.left - margin.right,
-      height = 400 - margin.top - margin.bottom;
+    width = 1000 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
 
 
   // create scale for x-axis
   var x = d3.scale.linear()
-      .range([80, width - 200])
+    .range([80, width - 200])
 
-      // create domain by taking maximum off data
-      .domain(d3.extent(selecteddata, function(d) { return Math.abs(parseFloat(d.BodyweightKg)); })).nice();
+    // create domain by taking maximum off data
+    .domain(d3.extent(selecteddata, function(d) { return Math.abs(parseFloat(d.BodyweightKg)); })).nice();
 
   // create scale for y-axis
   var y = d3.scale.linear()
-      .range([height, 10])
+    .range([height, 10])
 
-      // create domain by taking maximum of all data
-      .domain(d3.extent(selecteddata, function(d) { return Math.abs(parseFloat(d[lift])); })).nice();
+    // create domain by taking maximum of all data
+    .domain(d3.extent(selecteddata, function(d) { return Math.abs(parseFloat(d[lift])); })).nice();
 
 
   // add the tooltip area to the webpage
   var tooltip = d3.select("body").append("div")
-      .attr("class", "tooltip")
-      .style("opacity", 0);
+    .attr("class", "tooltip")
+    .style("opacity", 0);
 
   // dot for all lifters
   var dot = d3.select("#scatterplot").selectAll(".dot")
@@ -62,25 +66,25 @@ function updateScatter(svg, data, lift, sex, equipment, lifter){
 
   // create dots in scatterplot
   dot.enter().append("circle")
-      .attr("class", function(d){return (d.Name == lifter) ? "dot1" : "dot"})
-      .attr("r", function(d) { return (d.BodyweightKg == 0 || d[lift] == 0) ? 0 : (d.Name == lifter) ? 5 : 2; })
-      .attr("cx", function(d) { return isNaN(d.BodyweightKg) ? 0: x(d.BodyweightKg); })
-      .attr("cy", function(d) { return y(d[lift]); })
-      .on("click", function(d){ updateChart(svgChart, d, data)})
-      .on("mouseover", function(d) {
-        tooltip.transition()
-             .duration(200)
-             .style("opacity", .9)
-             .style("color", "black")
-        tooltip.html("<strong>" + "<h1>" + d["Name"] + ": " + "Bodyweight: " + d["BodyweightKg"] + ", " + lift + ": " + d[lift] + "</h1>" + "</strong>")
-             .style("left", (d3.event.pageX + 5) + "px")
-             .style("top", (d3.event.pageY - 28) + "px");
-        })
-      .on("mouseout", function(d) {
-          tooltip.transition()
-               .duration(500)
-               .style("opacity", 0);
-      });
+    .attr("class", function(d){return (d.Name == lifter) ? "dot1" : "dot"})
+    .attr("r", function(d) { return (d.BodyweightKg == 0 || d[lift] == 0) ? 0 : (d.Name == lifter) ? 5 : 2; })
+    .attr("cx", function(d) { return isNaN(d.BodyweightKg) ? 0: x(d.BodyweightKg); })
+    .attr("cy", function(d) { return y(d[lift]); })
+    .on("click", function(d){ updateChart(svgChart, d, data)})
+    .on("mouseover", function(d) {
+      tooltip.transition()
+         .duration(200)
+         .style("opacity", .9)
+         .style("color", "black")
+      tooltip.html("<strong>" + "<h1>" + d["Name"] + ": " + "Bodyweight: " + d["BodyweightKg"] + ", " + lift + ": " + d[lift] + "</h1>" + "</strong>")
+         .style("left", (d3.event.pageX + 5) + "px")
+         .style("top", (d3.event.pageY - 28) + "px");
+      })
+    .on("mouseout", function(d) {
+      tooltip.transition()
+       .duration(500)
+       .style("opacity", 0);
+    });
 
   svg.selectAll('.dot1')
     .remove()
@@ -95,17 +99,17 @@ function updateScatter(svg, data, lift, sex, equipment, lifter){
     .on("click", function(d){ updateChart(svg ,d, data)})
     .on("mouseover", function(d) {
       tooltip.transition()
-           .duration(200)
-           .style("opacity", .9)
-           .style("color", "black")
+         .duration(200)
+         .style("opacity", .9)
+         .style("color", "black")
       tooltip.html("<strong>" + "<h1>" + d["Name"] + ": " + "Bodyweight: " + d["BodyweightKg"] + ", " + lift + ": " + d[lift] + "</h1>" + "</strong>")
-           .style("left", (d3.event.pageX + 5) + "px")
-           .style("top", (d3.event.pageY - 28) + "px");
+         .style("left", (d3.event.pageX + 5) + "px")
+         .style("top", (d3.event.pageY - 28) + "px");
       })
     .on("mouseout", function(d) {
-        tooltip.transition()
-             .duration(500)
-             .style("opacity", 0);
+      tooltip.transition()
+         .duration(500)
+         .style("opacity", 0);
     });
 
   svg.select(".title").remove()
@@ -156,6 +160,7 @@ function createData(data, lift, sex, equipment, lifter){
         }
       }
     }
+
     else if(sex != "all"){
       for(var i = 0; i < lengthOfArray; i++){
         if(data.data[i].Sex == sex){
@@ -179,6 +184,7 @@ function createData(data, lift, sex, equipment, lifter){
         }
       }
     }
+
     if(sex != "all"){
       for(var i = 0; i < lengthOfArray; i++){
         if(data.data[i].Equipment == equipment && data.data[i].Sex == sex){
@@ -199,12 +205,12 @@ function createData(data, lift, sex, equipment, lifter){
  */
 function createScatterTitle(svg, margin, width, lift, sex, equipment){
   svg.append("text")
-      .attr("class", "title")
-      .attr("x", (width / 2))
-      .attr("y", 3 + (margin.top / 2))
-      .attr("text-anchor", "middle")
-      .text("Scatterplot: Bodyweight vs " + lift + ", sex: " + sex + ", equipment: " + equipment)
-      .style({"text-anchor":"middle", "font-family":"Arial", "font-weight":"800", "font-size": "12px"});
+    .attr("class", "title")
+    .attr("x", (width / 2))
+    .attr("y", 3 + (margin.top / 2))
+    .attr("text-anchor", "middle")
+    .text("Scatterplot: Bodyweight vs " + lift + ", sex: " + sex + ", equipment: " + equipment)
+    .style({"text-anchor":"middle", "font-family":"Arial", "font-weight":"800", "font-size": "12px"});
 }
 
 /**
@@ -212,39 +218,39 @@ function createScatterTitle(svg, margin, width, lift, sex, equipment){
  */
 function createScatterAxes(svg, x, y, height, width){
   var xAxis = d3.svg.axis()
-      .scale(x)
-      .orient("bottom");
+    .scale(x)
+    .orient("bottom");
 
   var yAxis = d3.svg.axis()
-      .scale(y)
-      .orient("left");
+    .scale(y)
+    .orient("left");
 
   svg.select(".x").remove()
 
   svg.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + height + ")")
-      .call(xAxis)
-      .append("text")
-      .attr("class", "label")
-      .attr("font-size","12px")
-      .attr("x", width - 200)
-      .attr("y", - 10)
-      .style("text-anchor", "end")
-      .text("Bodyweight(kg)");
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis)
+    .append("text")
+    .attr("class", "label")
+    .attr("font-size","12px")
+    .attr("x", width - 200)
+    .attr("y", - 10)
+    .style("text-anchor", "end")
+    .text("Bodyweight(kg)");
 
   svg.select(".y").remove()
 
   svg.append("g")
-      .attr("class", "y axis")
-      .attr("transform", "translate(60, 0)")
-      .call(yAxis)
-      .append("text")
-      .attr("class", "label")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 6)
-      .attr("font-size","12px")
-      .attr("dy", ".71em")
-      .style("text-anchor", "end")
-      .text(lift)
+    .attr("class", "y axis")
+    .attr("transform", "translate(60, 0)")
+    .call(yAxis)
+    .append("text")
+    .attr("class", "label")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 6)
+    .attr("font-size","12px")
+    .attr("dy", ".71em")
+    .style("text-anchor", "end")
+    .text(lift)
 }

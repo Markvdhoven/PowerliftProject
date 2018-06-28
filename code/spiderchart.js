@@ -1,9 +1,15 @@
+/*
+* Mark van den Hoven 10533133
+* Here are functions that are correlated to the spiderchart visualisations
+**/
+
 /**
  * Creates spiderchart
  * @param (array) data The entire data of all lifters
  * @param (string) equipment The equipment for which you want to make spiderchart
  * @param (string) lift The lift for which you want to make spiderchart
  */
+
 function spiderChart(data, equipment, lift){
   var w = 500,
 	h = 500;
@@ -47,6 +53,7 @@ function selectDataUnder18(data, equipment, lift){
       }
     }
   }
+
   var sumMen = 0
   for(var i = 0; i<liftListMen.length; i++){
     if(!isNaN(parseInt(liftListMen[i]))){

@@ -1,3 +1,8 @@
+/*
+* Mark van den Hoven 10533133
+* Here are functions that are correlated to the barchart visualisations
+**/
+
 /**
  * Creates svg element and bar chart for the first time
  * @param (array) lifter The lifter for which you want to create the barchart
@@ -120,14 +125,14 @@ function createAxis(svg, LifterList, xscale){
     .attr("class", "y axis")
     .attr("transform", "translate(" + 40 + ",30)")
     .call(yAxis)
-     .append("text")
-     .attr("transform", "rotate(-90)")
-     .attr("y", 6)
-     .attr("x", 0)
-     .attr("dy", ".35em")
-     .attr("font-size", "11px")
-     .style("text-anchor", "end")
-     .text("Kilograms");
+    .append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 6)
+    .attr("x", 0)
+    .attr("dy", ".35em")
+    .attr("font-size", "11px")
+    .style("text-anchor", "end")
+    .text("Kilograms");
 }
 
 /*

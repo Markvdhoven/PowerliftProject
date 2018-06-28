@@ -1,5 +1,9 @@
-// Inspired by http://informationandvisualization.de/blog/box-plot
+/*
+* Mark van den Hoven 10533133
+* This is a file used for the boxplot visualisations (not my own code)
+**/
 
+// Inspired by http://informationandvisualization.de/blog/box-plot
 d3.box = function(fulldata, lift) {
   var width = 1,
       height = 1,

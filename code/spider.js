@@ -1,5 +1,9 @@
-// Inspired by http://bl.ocks.org/nbremer/6506614
+/*
+* Mark van den Hoven 10533133
+* This is a file used for the spiderchart visualisations (not my own code)
+**/
 
+// Inspired by http://bl.ocks.org/nbremer/6506614
 var RadarChart = {
   draw: function(id, d, options){
   var cfg = {
@@ -204,7 +208,7 @@ var RadarChart = {
 
 	  series++;
 	});
-  
+
 	//Tooltip
 	tooltip = g.append('text')
 			   .style('opacity', 0)

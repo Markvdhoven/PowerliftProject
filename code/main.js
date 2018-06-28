@@ -1,3 +1,8 @@
+/*
+* Mark van den Hoven 10533133
+* This is the main page where all visualisations are called
+**/
+
 // default data when opening visualisations for the first time
 var buttonValue = "data/powerliftdataUV.json"
 

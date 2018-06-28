@@ -1,3 +1,8 @@
+/*
+* Mark van den Hoven 10533133
+* Here are functions that are correlated to the boxplot visualisations
+**/
+
 /**
  * Creates svg element and boxplot for the first time
  * @param (array) data The entire data of all lifters
@@ -85,10 +90,10 @@ function boxPlot(data, lift, sex){
 function iqr(k) {
   return function(d, i) {
     var q1 = d.quartiles[0],
-        q3 = d.quartiles[2],
-        iqr = (q3 - q1) * k,
-        i = -1,
-        j = d.length;
+      q3 = d.quartiles[2],
+      iqr = (q3 - q1) * k,
+      i = -1,
+      j = d.length;
     while (d[++i] < q1 - iqr);
     while (d[--j] > q3 + iqr);
     return [i, j];
@@ -103,69 +108,62 @@ function createBoxData(data, lift, sex){
 
   // iterate over data
   for(var info = 0; info < data.data.length; info++){
-      equipment = data.data[info]["Equipment"]
-      if(equipment == "Raw"){
-        if(sex == "all"){
+    equipment = data.data[info]["Equipment"]
+    if(equipment == "Raw"){
+      if(sex == "all"){
+        LiftList.push({"Raw":data.data[info][lift],"Wraps":"","Single-ply":"","Multi-ply":""})
+      }
+      else if(sex != "all"){
+        if(data.data[info]["Sex"] == sex){
           LiftList.push({"Raw":data.data[info][lift],"Wraps":"","Single-ply":"","Multi-ply":""})
         }
-        else if(sex != "all"){
-          if(data.data[info]["Sex"] == sex){
-            LiftList.push({"Raw":data.data[info][lift],"Wraps":"","Single-ply":"","Multi-ply":""})
-          }
+      }
+    }
+
+    if(equipment == "Wraps"){
+      if(sex == "all"){
+        LiftList.push({"Raw":"", "Wraps":data.data[info][lift], "Single-ply":"", "Multi-ply":""})
+      }
+      else if(sex != "all"){
+        if(data.data[info]["Sex"] == sex){
+          LiftList.push({"Raw":"","Wraps":data.data[info][lift],"Single-ply":"","Multi-ply":""})
         }
       }
+    }
 
-      if(equipment == "Wraps"){
-        if(sex == "all"){
-          LiftList.push({"Raw":"", "Wraps":data.data[info][lift], "Single-ply":"", "Multi-ply":""})
-        }
-        else if(sex != "all"){
-          if(data.data[info]["Sex"] == sex){
-            LiftList.push({"Raw":"","Wraps":data.data[info][lift],"Single-ply":"","Multi-ply":""})
-          }
-        }
+    if(equipment == "Single-ply"){
+      if(sex == "all"){
+        LiftList.push({"Raw":"", "Wraps":"", "Single-ply":data.data[info][lift], "Multi-ply":""})
       }
-
-      if(equipment == "Single-ply"){
-        if(sex == "all"){
+      else if(sex != "all"){
+        if(data.data[info]["Sex"] == sex){
           LiftList.push({"Raw":"", "Wraps":"", "Single-ply":data.data[info][lift], "Multi-ply":""})
         }
-        else if(sex != "all"){
-          if(data.data[info]["Sex"] == sex){
-            LiftList.push({"Raw":"", "Wraps":"", "Single-ply":data.data[info][lift], "Multi-ply":""})
-          }
-        }
       }
+    }
 
-      if(equipment == "Multi-ply"){
-        if(sex == "all"){
+    if(equipment == "Multi-ply"){
+      if(sex == "all"){
+        LiftList.push({"Raw":"", "Wraps":"", "Single-ply":"", "Multi-ply":data.data[info][lift]})
+      }
+      else if(sex != "all"){
+        if(data.data[info]["Sex"] == sex){
           LiftList.push({"Raw":"", "Wraps":"", "Single-ply":"", "Multi-ply":data.data[info][lift]})
         }
-        else if(sex != "all"){
-          if(data.data[info]["Sex"] == sex){
-            LiftList.push({"Raw":"", "Wraps":"", "Single-ply":"", "Multi-ply":data.data[info][lift]})
-          }
-        }
       }
+    }
   }
 }
 
-/**
- * Adds title
- */
 function addBoxTitle(svg, width, margin, lift, sex){
   svg.append("text")
-        .attr("x", (width / 2))
-        .attr("y", 0 + (margin.top / 2))
-        .attr("text-anchor", "middle")
-        .text("Lifts per equipment, " + lift + ", sex: " + sex )
-        .style({"text-anchor":"middle", "font-family":"Arial", "font-weight":"800", "font-size": "12px"});
-
+    .attr("x", (width / 2))
+    .attr("y", 0 + (margin.top / 2))
+    .attr("text-anchor", "middle")
+    .text("Lifts per equipment, " + lift + ", sex: " + sex )
+    .style({"text-anchor":"middle", "font-family":"Arial", "font-weight":"800", "font-size": "12px"});
 }
 
-/**
- * Adds axes
- */
 function drawBoxAxes(svg, height, width, margin, x ,y){
 
   var xAxis = d3.svg.axis()
@@ -178,43 +176,42 @@ function drawBoxAxes(svg, height, width, margin, x ,y){
 
   // draw y axis
  svg.append("g")
-     .attr("class", "y axis")
-     .call(yAxis)
-     .append("text") // and text1
-     .attr("class", "label")
-     .attr("transform", "rotate(-90)")
-     .attr("y", 6)
-     .attr("dy", ".71em")
-     .style("text-anchor", "end")
-     .style("font-size", "12px")
-     .text("Kilograms");
+   .attr("class", "y axis")
+   .call(yAxis)
+   .append("text") // and text1
+   .attr("class", "label")
+   .attr("transform", "rotate(-90)")
+   .attr("y", 6)
+   .attr("dy", ".71em")
+   .style("text-anchor", "end")
+   .style("font-size", "12px")
+   .text("Kilograms");
 
  // draw x axis
  svg.append("g")
-     .attr("class", "x axis")
-     .attr("transform", "translate(0," + (height  + margin.top + 10) + ")")
-     .call(xAxis)
-     .append("text")
-     .attr("class", "label")
-     .attr("x", (width / 2) )
-     .attr("y",  10 )
-     .attr("dy", ".71em")
-     .style("text-anchor", "middle")
-     .style("font-size", "12px")
-     .text("Equipment");
+   .attr("class", "x axis")
+   .attr("transform", "translate(0," + (height  + margin.top + 10) + ")")
+   .call(xAxis)
+   .append("text")
+   .attr("class", "label")
+   .attr("x", (width / 2) )
+   .attr("y",  10 )
+   .attr("dy", ".71em")
+   .style("text-anchor", "middle")
+   .style("font-size", "12px")
+   .text("Equipment");
 }
 
 function createBoxSVG(width, height, margin){
-    var svg = d3.select("#boxplot").append("svg")
-  		.attr("width", width + margin.left + margin.right)
-  		.attr("height", height + margin.top + margin.bottom)
-  		.attr("class", "box")
-      .attr("id", "oldboxplot")
-  		.append("g")
-  		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  var svg = d3.select("#boxplot").append("svg")
+		.attr("width", width + margin.left + margin.right)
+		.attr("height", height + margin.top + margin.bottom)
+		.attr("class", "box")
+    .attr("id", "oldboxplot")
+		.append("g")
+		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    return svg
-
+  return svg
 }
 
 function createBoxChart(data, lift, height, min, max, labels){
@@ -224,13 +221,13 @@ function createBoxChart(data, lift, height, min, max, labels){
     .domain([min, max])
     .showLabels(labels);
 
-    return chart
+  return chart
 }
 
 function drawChart(svg, margin, chart, info, x){
   svg.selectAll(".box")
-      .data(info)
-      .enter().append("g")
-      .attr("transform", function(d) { return "translate(" +  x(d[0])  + "," + margin.top + ")"; } )
-      .call(chart.width(x.rangeBand()));
+    .data(info)
+    .enter().append("g")
+    .attr("transform", function(d) { return "translate(" +  x(d[0])  + "," + margin.top + ")"; } )
+    .call(chart.width(x.rangeBand()));
 }
