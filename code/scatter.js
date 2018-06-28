@@ -27,7 +27,6 @@ function makeGraph(data, lift, sex, equipment, lifter){
  * Function that updates scatterplot
  */
 function updateScatter(svg, data, lift, sex, equipment, lifter){
-  console.log(equipment)
   selecteddata = createData(data, lift, sex, equipment, lifter)[0]
   lifterList = createData(data, lift, sex, equipment, lifter)[1]
 

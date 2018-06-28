@@ -26,9 +26,6 @@ d3.box = function(fulldata, lift) {
 
 	  var d = data[1].sort(d3.ascending);
 
-	 // console.log(boxIndex);
-	  //console.log(d);
-
       var g = d3.select(this),
           n = d.length,
           min = d[0],
