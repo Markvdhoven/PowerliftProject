@@ -9,9 +9,11 @@ a database based on the first letter of the first name of the competetor. When y
 
 ![alt text](https://github.com/Markvdhoven/PowerliftProject/blob/master/doc/README1.JPG)
 
-It is also possible to select a lift, sex and equipment you want to visualize:
+It is also possible to select a lift, sex and equipment you want to visualize. When you skip this step it will show squat, male and raw:
 
 ![alt text](https://github.com/Markvdhoven/PowerliftProject/blob/master/doc/README2.JPG)
+
+When selected these qualities, 
 
 ![alt text](https://github.com/Markvdhoven/PowerliftProject/blob/master/doc/README3.JPG)
 
